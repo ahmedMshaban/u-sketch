@@ -1,7 +1,7 @@
 function SprayCanTool(){
 	
 	this.name = "sprayCanTool";
-	this.icon = "assets/sprayCan.jpg";
+	this.icon = "assets/sprayCan.svg";
 
 	var points = 13;
 	var spread = 10;

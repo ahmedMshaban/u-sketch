@@ -1,9 +1,144 @@
+/****************************************************************
+Css Reset
+http://meyerweb.com/eric/tools/css/reset/ 
+   v2.0 | 20110126
+   License: none (public domain)
+****************************************************************/
+html,
+body,
+div,
+span,
+applet,
+object,
+iframe,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+blockquote,
+pre,
+a,
+abbr,
+acronym,
+address,
+big,
+cite,
+code,
+del,
+dfn,
+em,
+img,
+ins,
+kbd,
+q,
+s,
+samp,
+small,
+strike,
+strong,
+sub,
+sup,
+tt,
+var,
+b,
+u,
+i,
+center,
+dl,
+dt,
+dd,
+ol,
+ul,
+li,
+fieldset,
+form,
+label,
+legend,
+table,
+caption,
+tbody,
+tfoot,
+thead,
+tr,
+th,
+td,
+article,
+aside,
+canvas,
+details,
+embed,
+figure,
+figcaption,
+footer,
+header,
+hgroup,
+menu,
+nav,
+output,
+ruby,
+section,
+summary,
+time,
+mark,
+audio,
+video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  font: inherit;
+  vertical-align: baseline;
+}
+/* HTML5 display-role reset for older browsers */
+article,
+aside,
+details,
+figcaption,
+figure,
+footer,
+header,
+hgroup,
+menu,
+nav,
+section {
+  display: block;
+}
+body {
+  line-height: 1;
+}
+ol,
+ul {
+  list-style: none;
+}
+blockquote,
+q {
+  quotes: none;
+}
+blockquote:before,
+blockquote:after,
+q:before,
+q:after {
+  content: "";
+  content: none;
+}
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+/****************************************************************
+General
+****************************************************************/
 html {
   font-size: 62.5%;
 }
 
 body {
   font-size: 1.4rem;
+  background-color: #edf0f2;
 }
 
 html,
@@ -19,8 +154,8 @@ Header
 ****************************************************************/
 header {
   grid-area: header;
-  font-family: Helvetica, sans-serif;
   background-image: linear-gradient(-30deg, #dc85ff, #ffbc2a);
+  border-bottom: 1px solid #dddddd;
   padding: 8px 4px;
   flex-shrink: 0;
   display: flex;
@@ -31,9 +166,11 @@ header {
 
 h1 {
   margin: 0;
+  font-family: Helvetica, sans-serif;
   font-size: 2.5em;
   text-shadow: 0px 1px 2px #393535;
   color: #fff;
+  font-weight: bold;
 }
 
 header nav {
@@ -61,7 +198,6 @@ header button {
   border-right-color: transparent;
   border-bottom-color: transparent;
   border-left-color: transparent;
-  font-family: "Open Sans", sans-serif;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -85,28 +221,49 @@ header button:hover {
   background-color: rgba(0, 0, 0, 0.2);
 }
 
-#sidebar {
+/****************************************************************
+Main
+****************************************************************/
+main {
+  display: grid;
+  height: 100%;
+  grid-template-columns: 50px 230px;
+  grid-template-rows: minmax(1000px, 1fr);
+  grid-template-areas: "sidebar content content";
+  background-color: #fff;
+  color: #444;
+}
+/****************************************************************
+Sidebar
+****************************************************************/
+aside {
   grid-area: sidebar;
-  overflow-y: scroll;
+  background: #0e1318;
+  z-index: 2;
 }
 
+.sideBarItem img {
+  max-height: 50px;
+  max-width: 50px;
+  /*To remove
+ https://stackoverflow.com/questions/22252472/how-to-change-the-color-of-an-svg-element 
+  */
+  filter: invert(100%) sepia(5%) saturate(7462%) hue-rotate(88deg)
+    brightness(128%) contrast(103%);
+	cursor: pointer;
+}
+
+/****************************************************************
+Drawing Area
+****************************************************************/
 #content {
   grid-area: content;
-}
-
-.footer {
-  grid-area: footer;
 }
 
 .sideBarItem {
   max-height: 50px;
   max-width: 50px;
   padding: 5px;
-}
-
-.sideBarItem img {
-  max-height: 50px;
-  max-width: 50px;
 }
 
 .colourPalette {
