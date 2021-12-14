@@ -1,7 +1,88 @@
+html {
+  font-size: 62.5%;
+}
+
+body {
+  font-size: 1.4rem;
+}
+
 html,
 body {
   margin: 0px;
   height: 100%;
+  font-family: "Open Sans", sans-serif;
+  letter-spacing: 0.01rem;
+}
+
+/****************************************************************
+Header
+****************************************************************/
+header {
+  grid-area: header;
+  font-family: Helvetica, sans-serif;
+  background-image: linear-gradient(-30deg, #dc85ff, #ffbc2a);
+  padding: 8px 4px;
+  flex-shrink: 0;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+}
+
+h1 {
+  margin: 0;
+  font-size: 2.5em;
+  text-shadow: 0px 1px 2px #393535;
+  color: #fff;
+}
+
+header nav {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+header button {
+  cursor: pointer;
+  background-color: rgba(0, 0, 0, 0.1);
+  color: white;
+  height: 40px;
+  min-width: 40px;
+  border-radius: 4px;
+  letter-spacing: 0.01rem;
+  font-weight: 600;
+  font-size: 1em;
+  line-height: 1.4;
+  border: 2px solid transparent;
+  border-top-color: transparent;
+  border-right-color: transparent;
+  border-bottom-color: transparent;
+  border-left-color: transparent;
+  border-top-color: transparent;
+  border-right-color: transparent;
+  border-bottom-color: transparent;
+  border-left-color: transparent;
+  font-family: "Open Sans", sans-serif;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: border-color 0.5s, background-color 0.5s;
+  margin: 6px;
+}
+
+header svg {
+  color: #fff;
+  font-size: 2rem;
+  margin-right: 5px;
+  width: 20px;
+}
+
+header #clearButton svg,
+header #undoButton svg {
+  fill: #fff;
+}
+
+header button:hover {
+  background-color: rgba(0, 0, 0, 0.2);
 }
 
 #sidebar {
@@ -11,11 +92,6 @@ body {
 
 #content {
   grid-area: content;
-}
-
-.header {
-  grid-area: header;
-  font-family: Helvetica, sans-serif;
 }
 
 .footer {
@@ -52,26 +128,4 @@ body {
   max-height: 40px;
   max-width: 40px;
   margin: 5px;
-}
-
-.wrapper {
-  display: grid;
-  height: 100%;
-  grid-template-columns: 70px 230px minmax(500px, 1fr);
-  grid-template-rows: 35px minmax(500px, 1fr) 160px;
-  grid-template-areas:
-    "header header header"
-    "sidebar content content"
-    "colourP colourP options";
-  background-color: #fff;
-  color: #444;
-}
-.box {
-  background-color: #444;
-  color: #fff;
-  font-size: 150%;
-}
-
-.header {
-  background-color: #999;
 }
