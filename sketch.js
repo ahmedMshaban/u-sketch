@@ -19,11 +19,10 @@ function setup() {
 	//create a toolset for storing the tools
 	toolset = new ToolSet();
 
-
 	//add the tools to the toolset.
 	toolset.addTool(new FreehandTool("assets/pencil.svg", "freehand"));
-	toolset.addTool(new LineToTool());
-	toolset.addTool(new SprayCanTool());
+	toolset.addTool(new LineToTool("assets/lineTo.svg", "LineTo"));
+	toolset.addTool(new SprayCanTool("assets/sprayCan.svg", "sprayCanTool"));
 	toolset.addTool(new mirrorDrawTool());
 	background(255);
 
