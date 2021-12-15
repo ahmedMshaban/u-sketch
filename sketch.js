@@ -19,8 +19,9 @@ function setup() {
 	//create a toolset for storing the tools
 	toolset = new ToolSet();
 
+
 	//add the tools to the toolset.
-	toolset.addTool(new FreehandTool());
+	toolset.addTool(new FreehandTool("assets/pencil.svg", "freehand"));
 	toolset.addTool(new LineToTool());
 	toolset.addTool(new SprayCanTool());
 	toolset.addTool(new mirrorDrawTool());
@@ -33,7 +34,7 @@ function draw() {
 	//hasOwnProperty is a javascript function that tests
 	//if an object contains a particular method or property
 	//if there isn't a draw method the app will alert the user
-	if (toolset.selectedTool.hasOwnProperty("draw")) {
+	if ("draw" in toolset.selectedTool) {
 		toolset.selectedTool.draw();
 	} else {
 		alert("it doesn't look like your tool has a draw method!");
