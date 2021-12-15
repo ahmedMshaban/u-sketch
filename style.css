@@ -242,15 +242,62 @@ aside {
   z-index: 2;
 }
 
+.sideBarItem {
+  max-height: 50px;
+  max-width: 50px;
+  padding: 8px 5px;
+  text-align: center;
+  position: relative;
+  cursor: pointer;
+}
+
 .sideBarItem img {
   max-height: 50px;
   max-width: 50px;
+  width: 25px;
   /*To remove
  https://stackoverflow.com/questions/22252472/how-to-change-the-color-of-an-svg-element 
   */
   filter: invert(100%) sepia(5%) saturate(7462%) hue-rotate(88deg)
     brightness(128%) contrast(103%);
-	cursor: pointer;
+}
+
+.sideBarItem.active {
+  background: #f9b34c;
+}
+
+.sideBarItem.active img {
+  width: 27.5px;
+  filter: invert(0%) sepia(0%) saturate(7500%) hue-rotate(327deg)
+    brightness(96%) contrast(104%);
+}
+
+.sideBarItem .tooltiptext {
+  visibility: hidden;
+  width: auto;
+  background-color: #e08be7;
+  color: #fff;
+  text-align: center;
+  padding: 5px;
+  border-radius: 6px;
+  position: absolute;
+  z-index: 1;
+  left: 50px;
+}
+
+.sideBarItem:hover .tooltiptext {
+  visibility: visible;
+}
+
+.sideBarItem .tooltiptext::after {
+  content: " ";
+  position: absolute;
+  top: 50%;
+  right: 100%;
+  margin-top: -5px;
+  border-width: 5px;
+  border-style: solid;
+  border-color: transparent #e08be7 transparent transparent;
 }
 
 /****************************************************************
@@ -258,12 +305,6 @@ Drawing Area
 ****************************************************************/
 #content {
   grid-area: content;
-}
-
-.sideBarItem {
-  max-height: 50px;
-  max-width: 50px;
-  padding: 5px;
 }
 
 .colourPalette {

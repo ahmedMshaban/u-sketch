@@ -1,6 +1,6 @@
-//global variables that will store the toolbox colour palette
+//global variables that will store the toolset colour palette
 //amnd the helper functions
-var toolbox = null;
+let toolset = null;
 var colourP = null;
 var helpers = null;
 
@@ -16,14 +16,14 @@ function setup() {
 	helpers = new HelperFunctions();
 	// colourP = new ColourPalette();
 
-	//create a toolbox for storing the tools
-	toolbox = new Toolbox();
+	//create a toolset for storing the tools
+	toolset = new ToolSet();
 
-	//add the tools to the toolbox.
-	toolbox.addTool(new FreehandTool());
-	toolbox.addTool(new LineToTool());
-	toolbox.addTool(new SprayCanTool());
-	toolbox.addTool(new mirrorDrawTool());
+	//add the tools to the toolset.
+	toolset.addTool(new FreehandTool());
+	toolset.addTool(new LineToTool());
+	toolset.addTool(new SprayCanTool());
+	toolset.addTool(new mirrorDrawTool());
 	background(255);
 
 }
@@ -33,8 +33,8 @@ function draw() {
 	//hasOwnProperty is a javascript function that tests
 	//if an object contains a particular method or property
 	//if there isn't a draw method the app will alert the user
-	if (toolbox.selectedTool.hasOwnProperty("draw")) {
-		toolbox.selectedTool.draw();
+	if (toolset.selectedTool.hasOwnProperty("draw")) {
+		toolset.selectedTool.draw();
 	} else {
 		alert("it doesn't look like your tool has a draw method!");
 	}

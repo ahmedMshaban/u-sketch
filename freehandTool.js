@@ -1,6 +1,6 @@
 function FreehandTool(){
 	//set an icon and a name for the object
-	this.icon = "assets/freehand.jpg";
+	this.icon = "assets/pencil.svg";
 	this.name = "freehand";
 
 	//to smoothly draw we'll draw a line from the previous mouse location
