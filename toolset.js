@@ -36,7 +36,7 @@ class ToolSet {
   //add a tool to the tools array
   addTool(tool) {
     //check that the object tool has an icon and a name
-    if (!tool.hasOwnProperty("icon") || !tool.hasOwnProperty("name")) {
+    if (!"icon" in tool || !"name" in tool) {
       alert("make sure your tool has both a name and an icon");
     }
     this.tools.push(tool);
@@ -54,10 +54,7 @@ class ToolSet {
     for (const tool of this.tools) {
       if (tool.name == toolName) {
         //if the tool has an unselectTool method run it.
-        if (
-          this.selectedTool != null &&
-          this.selectedTool.hasOwnProperty("unselectTool")
-        ) {
+        if (this.selectedTool != null && "unselectTool" in this.selectedTool) {
           this.selectedTool.unselectTool();
         }
         //select the tool and highlight it on the toolbar
