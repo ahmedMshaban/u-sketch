@@ -21,10 +21,10 @@ function setup() {
   toolset = new ToolSet();
 
   //add the tools to the toolset.
-  toolset.addTool(new FreehandTool("assets/pencil.svg", "freehand"));
+  toolset.addTool(new FreehandTool("assets/pencil.svg", "Freehand"));
   toolset.addTool(new LineToTool("assets/lineTo.svg", "LineTo"));
-  toolset.addTool(new SprayCanTool("assets/sprayCan.svg", "sprayCanTool"));
-  toolset.addTool(new mirrorDrawTool("assets/mirror.svg", "mirrorDraw"));
+  toolset.addTool(new SprayCanTool("assets/sprayCan.svg", "SprayCan"));
+  toolset.addTool(new mirrorDrawTool("assets/mirror.svg", "MirrorDraw"));
   background(255);
 }
 
