@@ -1,4 +1,4 @@
-class FreehandTool extends Tools {
+class Freehand extends Tools {
   constructor(icon, name) {
     super(icon, name);
     this.previousMouseX = -1;

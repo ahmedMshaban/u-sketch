@@ -1,7 +1,7 @@
 //a tool for drawing straight lines to the screen. Allows the user to preview
 //the a line to the current mouse position before drawing the line to the
 //pixel array.
-class LineToTool extends Tools {
+class LineTo extends Tools {
   constructor(icon, name) {
     super(icon, name);
     this.startMouseX = -1;

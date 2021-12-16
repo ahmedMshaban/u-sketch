@@ -1,4 +1,4 @@
-class mirrorDrawTool extends Tools {
+class MirrorDraw extends Tools {
   constructor(icon, name) {
     super(icon, name);
     //which axis is being mirrored (x or y) x is default

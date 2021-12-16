@@ -1,4 +1,4 @@
-class SprayCanTool extends Tools {
+class SprayCan extends Tools {
   constructor(icon, name) {
     super(icon, name);
     this.points = 13;
