@@ -6,9 +6,6 @@ class Tools {
     this.isDrawing = false;
   }
 
-  displayToolConfig() {
-    
-  }
 
   draw() {}
 }

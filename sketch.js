@@ -1,7 +1,7 @@
 //global variables that will store the toolset colour palette
 //amnd the helper functions
 let toolset = null;
-var colourP = null;
+let sidebar = null;
 var helpers = null;
 
 function setup() {
@@ -13,9 +13,11 @@ function setup() {
   );
   c.parent("content");
 
+  //Get the sidebar object
+  sidebar = document.getElementById("sidebar");
+
   //create helper functions and the colour palette
   helpers = new HelperFunctions();
-  // colourP = new ColourPalette();
 
   //create a toolset for storing the tools
   toolset = new ToolSet();
@@ -41,4 +43,16 @@ function draw() {
   } else {
     alert("it doesn't look like your tool has a draw method!");
   }
+
+  //If the tool config is active and the user
+  //clicks anywhere outside toolset area, close tool conif
+  //and hide the modal.
+  window.addEventListener("click", (event) => {
+    if (toolset.isToolCofig) {
+      if (event.target === Modal.elt || event.target === sidebar) {
+        Modal.hide();
+        toolset.hideToolConfig();
+      }
+    }
+  });
 }

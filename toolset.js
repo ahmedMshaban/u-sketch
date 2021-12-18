@@ -1,13 +1,24 @@
-const toolbarItemClick = function (item, self) {
+//display tool config for the current toolbarItem
+const displayToolConfig = function (currentItem, tools) {
+  //hide all tools config
+  tools.hideToolConfig();
+  //active only for current tool
+  currentItem.elt.childNodes[0].classList.add("active");
+  tools.isToolCofig = true;
+};
+
+const toolbarItemClick = function (currentItem, tools) {
   //remove any existing active class
   const items = selectAll(".sideBarItem");
   for (const item of items) {
     item.removeClass("active");
   }
 
-  const toolName = item.id().split("sideBarItem")[0];
+  const toolName = currentItem.id().split("sideBarItem")[0];
 
-  self.selectTool(toolName);
+  tools.selectTool(toolName);
+  displayToolConfig(currentItem,tools);
+  Modal.show();
   //call loadPixels to make sure most recent changes are saved to pixel array
   loadPixels();
 };
@@ -15,7 +26,7 @@ const toolbarItemClick = function (item, self) {
 //add a new tool icon to the html page
 const addToolIcon = function (icon, name) {
   const sideBarItem = createDiv(
-    `<img src='${icon}'><span class='tooltiptext'>${name}</span></div>`
+    `<div class="toolConfig"></div><img src='${icon}'><span class='tooltiptext'>${name}</span></div>`
   );
   const self = this;
   sideBarItem.class("sideBarItem");
@@ -31,6 +42,7 @@ class ToolSet {
   constructor() {
     this.tools = [];
     this.selectedTool = null;
+    this.isToolCofig = false;
   }
 
   //add a tool to the tools array
@@ -60,12 +72,16 @@ class ToolSet {
         //select the tool and highlight it on the toolbar
         this.selectedTool = tool;
         select("#" + toolName + "sideBarItem").addClass("active");
-
-        //if the tool has an options area. Populate it now.
-        if (this.selectedTool.hasOwnProperty("populateOptions")) {
-          this.selectedTool.populateOptions();
-        }
       }
     }
   }
+
+  //hide tool config for all toolbarItems
+  hideToolConfig() {
+    const items = selectAll(".sideBarItem .toolConfig");
+    for (const item of items) {
+      item.removeClass("active");
+    }
+    this.isToolCofig = true;
+  };
 }
