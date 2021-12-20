@@ -3,6 +3,7 @@ class Freehand extends Tools {
     super(icon, name);
     this.previousMouseX = -1;
     this.previousMouseY = -1;
+    this.size = new Size();
   }
 
   //to smoothly draw we'll draw a line from the previous mouse location
@@ -22,6 +23,7 @@ class Freehand extends Tools {
       //if we already have values for previousX and Y we can draw a line from
       //there to the current mouse location
       else {
+        strokeWeight(this.size.value);
         line(this.previousMouseX, this.previousMouseY, mouseX, mouseY);
         this.previousMouseX = mouseX;
         this.previousMouseY = mouseY;
@@ -34,5 +36,9 @@ class Freehand extends Tools {
       this.previousMouseX = -1;
       this.previousMouseY = -1;
     }
+  }
+
+  displayConfigOptions() {
+    return  this.size.displaySizeRange(1, 250, "freehand");
   }
 }

@@ -5,7 +5,7 @@ class Eraser extends Tools {
   }
 
   draw() {
-    // console.log(this.size.value);
+    //console.log(this.size.value);
   }
 
   displayConfigOptions() {
