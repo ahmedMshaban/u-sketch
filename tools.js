@@ -6,6 +6,9 @@ class Tools {
     this.isDrawing = false;
   }
 
+  displayConfigOptions() {
+    return "<p>Test</p>";
+  }
 
   draw() {}
 }

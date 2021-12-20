@@ -17,24 +17,37 @@ const toolbarItemClick = function (currentItem, tools) {
   const toolName = currentItem.id().split("sideBarItem")[0];
 
   tools.selectTool(toolName);
-  displayToolConfig(currentItem,tools);
+  displayToolConfig(currentItem, tools);
   Modal.show();
   //call loadPixels to make sure most recent changes are saved to pixel array
   loadPixels();
 };
 
-//add a new tool icon to the html page
-const addToolIcon = function (icon, name) {
-  const sideBarItem = createDiv(
-    `<div class="toolConfig"></div><img src='${icon}'><span class='tooltiptext'>${name}</span></div>`
-  );
+//add the tool info to the html page
+const addToolInfo = function (icon, name, config) {
+  const toolConfig = createDiv();
+  const sideBarItem = createDiv();
+  const sideBarIcon = createImg(icon, name);
+  const sideBarTip = createElement("span", name);
   const self = this;
+  //sidebaritem
   sideBarItem.class("sideBarItem");
   sideBarItem.id(name + "sideBarItem");
   sideBarItem.parent("sidebar");
   sideBarItem.mouseClicked(function () {
     toolbarItemClick(sideBarItem, self);
   });
+  //toolconfig
+  toolConfig.class("toolConfig");
+  toolConfig.parent(sideBarItem);
+  if (config != "<p>Test</p>") {
+    config.parent(toolConfig);
+  }
+  //sidebartooltip
+  sideBarTip.parent(sideBarItem);
+  sideBarTip.class("tooltiptext");
+  //sidebaricon
+  sideBarIcon.parent(sideBarItem);
 };
 
 //container object for storing the tools. Functions to add new tools and select a tool
@@ -52,7 +65,9 @@ class ToolSet {
       alert("make sure your tool has both a name and an icon");
     }
     this.tools.push(tool);
-    addToolIcon.bind(this)(tool.icon, tool.name);
+
+    addToolInfo.bind(this)(tool.icon, tool.name, tool.displayConfigOptions());
+
     //if no tool is selected (ie. none have been added so far)
     //make this tool the selected one.
     if (this.selectedTool == null) {
@@ -83,5 +98,5 @@ class ToolSet {
       item.removeClass("active");
     }
     this.isToolCofig = true;
-  };
+  }
 }
