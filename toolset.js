@@ -24,8 +24,8 @@ const toolbarItemClick = function (currentItem, tools) {
 };
 
 //add the tool info to the html page
-const addToolInfo = function (icon, name, config) {
-  const toolConfig = createDiv();
+const addToolInfo = function (icon, name, configs) {
+  const toolConfigs = createDiv();
   const sideBarItem = createDiv();
   const sideBarIcon = createImg(icon, name);
   const sideBarTip = createElement("span", name);
@@ -37,11 +37,11 @@ const addToolInfo = function (icon, name, config) {
   sideBarItem.mouseClicked(function () {
     toolbarItemClick(sideBarItem, self);
   });
-  //toolconfig
-  toolConfig.class("toolConfig");
-  toolConfig.parent(sideBarItem);
-  if (config != "<p>Test</p>") {
-    config.parent(toolConfig);
+  //toolconfigs
+  toolConfigs.class("toolConfig");
+  toolConfigs.parent(sideBarItem);
+  for (const config of configs) {
+    config.parent(toolConfigs);
   }
   //sidebartooltip
   sideBarTip.parent(sideBarItem);

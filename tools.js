@@ -7,7 +7,7 @@ class Tools {
   }
 
   displayConfigOptions() {
-    return "<p>Test</p>";
+    return [];
   }
 
   draw() {}
