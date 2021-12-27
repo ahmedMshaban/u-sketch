@@ -13,6 +13,9 @@ class MirrorDraw extends Tools {
     //mouse coordinates for the other side of the Line of symmetry.
     this.previousOppositeMouseX = -1;
     this.previousOppositeMouseY = -1;
+
+    this.size = new Size();
+    this.color = new Color();
   }
 
   draw() {
@@ -33,6 +36,8 @@ class MirrorDraw extends Tools {
       //if there are values in the previous locations
       //draw a line between them and the current positions
       else {
+        strokeWeight(this.size.value);
+        stroke(this.color.outline);
         line(this.previousMouseX, this.previousMouseY, mouseX, mouseY);
         this.previousMouseX = mouseX;
         this.previousMouseY = mouseY;
@@ -107,24 +112,35 @@ class MirrorDraw extends Tools {
     updatePixels();
   }
 
-  //adds a button and click handler to the options area. When clicked
   //toggle the line of symmetry between horizonatl to vertical
-  populateOptions() {
-    select(".options").html(
-      "<button id='directionButton'>Make Horizontal</button>"
-    );
-    // 	//click handler
-    select("#directionButton").mouseClicked(function () {
-      const button = select("#" + this.elt.id);
-      if (self.axis == "x") {
-        self.axis = "y";
-        self.lineOfSymmetry = height / 2;
-        button.html("Make Vertical");
-      } else {
-        self.axis = "x";
-        self.lineOfSymmetry = width / 2;
-        button.html("Make Horizontal");
-      }
+  populateDirections() {
+    const buttonsContainer = createDiv();
+    buttonsContainer.class(`buttonsContainer`)
+
+    const horizontalBtn = createElement("button", "Make Horizontal");
+    const verticalBtn = createElement("button", "Make Vertical");
+
+    horizontalBtn.mouseClicked(() => {
+      this.axis = "y";
+      this.lineOfSymmetry = height / 2;
     });
+
+    verticalBtn.mouseClicked(() => {
+      this.axis = "x";
+      this.lineOfSymmetry = width / 2;
+    });
+
+    horizontalBtn.parent(buttonsContainer);
+    verticalBtn.parent(buttonsContainer);
+
+    return buttonsContainer;
+  }
+
+  displayConfigOptions() {
+    return [
+      this.color.displayOutline("mirrorDraw"),
+      this.size.displaySizeRange(1, 250, "mirrorDraw"),
+      this.populateDirections(),
+    ];
   }
 }
