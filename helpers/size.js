@@ -13,7 +13,7 @@ class Size {
     inp.class(`${className}SizeRange sizeRange slider`);
     inp.input((e) => {
       select(".optionValue", sizeObj).elt.innerHTML = e.target.value;
-      this.value = e.target.value;
+      this.value = +e.target.value;
     });
     inp.parent(sizeObj);
     return sizeObj;
