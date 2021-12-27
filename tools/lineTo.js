@@ -7,6 +7,8 @@ class LineTo extends Tools {
     this.startMouseX = -1;
     this.startMouseY = -1;
     this.drawing = false;
+    this.size = new Size();
+    this.color = new Color();
   }
 
   //draws the line to the screen
@@ -25,6 +27,8 @@ class LineTo extends Tools {
         //line between mouse pressed and released
         updatePixels();
         //draw the line
+        strokeWeight(this.size.value);
+        stroke(this.color.outline);
         line(this.startMouseX, this.startMouseY, mouseX, mouseY);
       }
     } else if (this.drawing) {
@@ -35,5 +39,16 @@ class LineTo extends Tools {
       this.startMouseX = -1;
       this.startMouseY = -1;
     }
+  }
+
+  topBottomPointsHandler() {
+
+  }
+
+  displayConfigOptions() {
+    return [
+      this.color.displayOutline("lineTo"),
+      this.size.displaySizeRange(1, 250, "lineTo"),
+    ];
   }
 }

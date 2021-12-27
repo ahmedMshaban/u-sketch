@@ -9,6 +9,4 @@ class Tools {
   displayConfigOptions() {
     return [];
   }
-
-  draw() {}
 }

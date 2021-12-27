@@ -30,6 +30,7 @@ const addToolInfo = function (icon, name, configs) {
   const sideBarIcon = createImg(icon, name);
   const sideBarTip = createElement("span", name);
   const self = this;
+
   //sidebaritem
   sideBarItem.class("sideBarItem");
   sideBarItem.id(name + "sideBarItem");
@@ -37,15 +38,18 @@ const addToolInfo = function (icon, name, configs) {
   sideBarItem.mouseClicked(function () {
     toolbarItemClick(sideBarItem, self);
   });
+
   //toolconfigs
   toolConfigs.class("toolConfig");
   toolConfigs.parent(sideBarItem);
   for (const config of configs) {
     config.parent(toolConfigs);
   }
+  
   //sidebartooltip
   sideBarTip.parent(sideBarItem);
   sideBarTip.class("tooltiptext");
+
   //sidebaricon
   sideBarIcon.parent(sideBarItem);
 };
