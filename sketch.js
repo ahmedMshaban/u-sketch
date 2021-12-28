@@ -26,6 +26,7 @@ function setup() {
   toolset.addTool(new Freehand("assets/pencil.svg", "Freehand"));
   toolset.addTool(new LineTo("assets/lineTo.svg", "LineTo"));
   toolset.addTool(new SprayCan("assets/sprayCan.svg", "SprayCan"));
+  toolset.addTool(new Stamp("assets/stamp.svg", "Stamp"));
   toolset.addTool(new Text("assets/text.svg", "Text"));
   toolset.addTool(new Eraser("assets/eraser.svg", "Eraser"));
   toolset.addTool(new MirrorDraw("assets/mirror.svg", "MirrorDraw"));

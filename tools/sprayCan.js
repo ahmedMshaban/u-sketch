@@ -9,6 +9,7 @@ class SprayCan extends Tools {
   draw() {
     const r = random(5, 10);
     if (mouseIsPressed) {
+      strokeWeight(1);
       for (let i = 0; i < this.points; i++) {
         point(
           random(mouseX - this.spread, mouseX + this.spread),
