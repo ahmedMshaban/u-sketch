@@ -29,25 +29,15 @@ class Stamp extends Tools {
     const selContainer = createDiv("<p class='optionTitle'>Shapes</p>");
     selContainer.class("shapesContainer");
     const sel = createSelect();
-    sel.option("Heart");
-    sel.option("Star");
-    sel.option("Thumbs up");
-    sel.option("Thumbs down");
-    sel.selected("Heart");
+    for (const shape in this.shapes) {
+      sel.option(shape);
+    }
+    sel.selected(this.selectedShape);
     sel.changed(() => {
-      switch (sel.value()) {
-        case "Heart":
-          this.selectedShape = this.shapes["Heart"];
-          break;
-        case "Star":
-          this.selectedShape = this.shapes["Star"];
-          break;
-        case "Thumbs up":
-          this.selectedShape = this.shapes["Thumbs up"];
-          break;
-        case "Thumbs down":
-          this.selectedShape = this.shapes["Thumbs down"];
-          break;
+      for (const shape in this.shapes) {
+        if (sel.value() === shape) {
+          this.selectedShape = this.shapes[shape];
+        }
       }
     });
     sel.parent(selContainer);
