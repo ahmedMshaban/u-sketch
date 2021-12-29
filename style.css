@@ -304,6 +304,16 @@ aside {
   border-color: transparent #0e1318 transparent transparent;
 }
 
+.toolConfig .textAlignContainer img {
+  filter: invert(99%) sepia(68%) saturate(2%) hue-rotate(328deg)
+    brightness(112%) contrast(100%);
+}
+
+.toolConfig .textAlignContainer img.active {
+  background-color: #f9b34c;
+  
+}
+
 .sideBarItem .tooltiptext {
   visibility: hidden;
   width: auto;
