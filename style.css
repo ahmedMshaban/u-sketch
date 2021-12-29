@@ -304,14 +304,15 @@ aside {
   border-color: transparent #0e1318 transparent transparent;
 }
 
-.toolConfig .textAlignContainer img {
+.toolConfig .textAlignContainer img,
+.toolConfig .fontStyleContainer img {
   filter: invert(99%) sepia(68%) saturate(2%) hue-rotate(328deg)
     brightness(112%) contrast(100%);
 }
 
-.toolConfig .textAlignContainer img.active {
+.toolConfig .textAlignContainer img.active,
+.toolConfig .fontStyleContainer img.active {
   background-color: #f9b34c;
-  
 }
 
 .sideBarItem .tooltiptext {

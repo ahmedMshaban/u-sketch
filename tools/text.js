@@ -51,9 +51,22 @@ class Text extends Tools {
       alignCenter.addClass("active");
     });
 
+    const alignJustify = createImg(
+      "../assets/justify-align.svg",
+      "Center Text Alignment"
+    );
+    alignJustify.class("alignCenter");
+    alignJustify.mouseClicked(function () {
+      // TODO: alignJustify
+      activeAlignmentHanlder();
+      alignJustify.addClass("active");
+    });
+
     alignLeft.parent(textAlignContainer);
     alignCenter.parent(textAlignContainer);
     alignRight.parent(textAlignContainer);
+    alignJustify.parent(textAlignContainer);
+
     return textAlignContainer;
   }
 
@@ -74,7 +87,62 @@ class Text extends Tools {
     return inpContainer;
   }
 
-  fontStyleHandler() {}
+  fontStyleHandler() {
+    const fontStyleContainer = createDiv();
+    fontStyleContainer.class("fontStyleContainer");
+
+    const activeStyleHanlder = () => {
+      const images = selectAll(".fontStyleContainer img");
+      for (const img of images) {
+        img.removeClass("active");
+      }
+    };
+
+    const boldStyle = createImg("../assets/bold-style.svg", "Bold Style");
+    boldStyle.class("boldStyle");
+    boldStyle.mouseClicked(function () {
+      // TODO: boldStyle
+      activeStyleHanlder();
+      boldStyle.addClass("active");
+    });
+
+    const strikethroughStyle = createImg(
+      "../assets/strikethrough-style.svg",
+      "Strikethrough Style"
+    );
+    strikethroughStyle.class("strikethroughStyle");
+    strikethroughStyle.mouseClicked(function () {
+      // TODO: strikethroughStyle
+      activeStyleHanlder();
+      strikethroughStyle.addClass("active");
+    });
+
+    const underlineStyle = createImg(
+      "../assets/underline-style.svg",
+      "Underline Style"
+    );
+    underlineStyle.class("underlineStyle");
+    underlineStyle.mouseClicked(function () {
+      // TODO: underlineStyle
+      activeStyleHanlder();
+      underlineStyle.addClass("active");
+    });
+
+    const italicStyle = createImg("../assets/italic-style.svg", "Italic Style");
+    italicStyle.class("italicStyle");
+    italicStyle.mouseClicked(function () {
+      // TODO: italicStyle
+      activeStyleHanlder();
+      italicStyle.addClass("active");
+    });
+
+    boldStyle.parent(fontStyleContainer);
+    strikethroughStyle.parent(fontStyleContainer);
+    underlineStyle.parent(fontStyleContainer);
+    italicStyle.parent(fontStyleContainer);
+
+    return fontStyleContainer;
+  }
 
   textRotateHanlder() {}
 
@@ -86,6 +154,7 @@ class Text extends Tools {
       this.color.displayOutline("text"),
       this.fontSizeHandler(),
       this.textAlignHandler(),
+      this.fontStyleHandler(),
     ];
   }
 }
