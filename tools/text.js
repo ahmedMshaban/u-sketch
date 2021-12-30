@@ -3,6 +3,22 @@ class Text extends Tools {
     super(icon, name);
     this.color = new Color();
     this.size = 14;
+    //Te following fonts are safe fonts for HTML and CSS and
+    //available on all major operating systems and using
+    //fallback fonts in case they are not available.
+    this.fonts = {
+      Arial: "Arial, sans-seri",
+      Verdana: "Verdana, sans-serif",
+      Helvetica: "Helvetica, sans-serif",
+      "Trebuchet MS": "'Trebuchet MS', sans-serif",
+      Tahoma: "Tahoma, sans-serif",
+      "Times New Roman": "'Times New Roman', serif",
+      Georgia: "Georgia, serif",
+      Garamond: "Garamond, serif",
+      "Courier New": "'Courier New', monospace",
+      "Brush Script MT": "'Brush Script MT', cursive",
+    };
+    this.selectedFont = this.fonts["Arial"];
   }
 
   draw() {}
@@ -70,7 +86,26 @@ class Text extends Tools {
     return textAlignContainer;
   }
 
-  fontFamilyHandler() {}
+  fontFamilyHandler() {
+    const fontFamilyContainer = createDiv(
+      "<p class='optionTitle'>Font Family</p>"
+    );
+    fontFamilyContainer.class("fontFamilyContainer");
+    const sel = createSelect();
+    for (const font in this.fonts) {
+      sel.option(font);
+    }
+    sel.selected(this.selectedFont);
+    sel.changed(() => {
+      for (const font in this.fonts) {
+        if (sel.value() === font) {
+          this.selectedFont = this.fonts[font];
+        }
+      }
+    });
+    sel.parent(fontFamilyContainer);
+    return fontFamilyContainer;
+  }
 
   fontSizeHandler() {
     const inpContainer = createDiv(
@@ -152,6 +187,7 @@ class Text extends Tools {
     return [
       this.color.displayFill("text"),
       this.color.displayOutline("text"),
+      this.fontFamilyHandler(),
       this.fontSizeHandler(),
       this.textAlignHandler(),
       this.fontStyleHandler(),
