@@ -3,6 +3,11 @@ class Text extends Tools {
     super(icon, name);
     this.color = new Color();
     this.size = 14;
+    this.style = "normal";
+    this.decorationSThrough = "none";
+    this.decorationUnderline = "none";
+    this.weight = "normal";
+    this.alignment = "left";
     //Te following fonts are safe fonts for HTML and CSS and
     //available on all major operating systems and using
     //fallback fonts in case they are not available.
@@ -39,9 +44,11 @@ class Text extends Tools {
       "Left Text Alignment"
     );
     alignLeft.class("alignLeft");
-    alignLeft.mouseClicked(function () {
-      // TODO: alignLeft
+    //active by default
+    alignLeft.addClass("active");
+    alignLeft.mouseClicked(() => {
       activeAlignmentHanlder();
+      this.alignment = "left";
       alignLeft.addClass("active");
     });
 
@@ -50,9 +57,9 @@ class Text extends Tools {
       "Right Text Alignment"
     );
     alignRight.class("alignRight");
-    alignRight.mouseClicked(function () {
-      // TODO: alignRight
+    alignRight.mouseClicked(() => {
       activeAlignmentHanlder();
+      this.alignment = "right";
       alignRight.addClass("active");
     });
 
@@ -61,9 +68,9 @@ class Text extends Tools {
       "Center Text Alignment"
     );
     alignCenter.class("alignCenter");
-    alignCenter.mouseClicked(function () {
-      // TODO: alignCenter
+    alignCenter.mouseClicked(() => {
       activeAlignmentHanlder();
+      this.alignment = "center";
       alignCenter.addClass("active");
     });
 
@@ -72,9 +79,9 @@ class Text extends Tools {
       "Center Text Alignment"
     );
     alignJustify.class("alignCenter");
-    alignJustify.mouseClicked(function () {
-      // TODO: alignJustify
+    alignJustify.mouseClicked(() => {
       activeAlignmentHanlder();
+      this.alignment = "justify";
       alignJustify.addClass("active");
     });
 
@@ -126,19 +133,16 @@ class Text extends Tools {
     const fontStyleContainer = createDiv();
     fontStyleContainer.class("fontStyleContainer");
 
-    const activeStyleHanlder = () => {
-      const images = selectAll(".fontStyleContainer img");
-      for (const img of images) {
-        img.removeClass("active");
-      }
-    };
-
     const boldStyle = createImg("../assets/bold-style.svg", "Bold Style");
     boldStyle.class("boldStyle");
-    boldStyle.mouseClicked(function () {
-      // TODO: boldStyle
-      activeStyleHanlder();
-      boldStyle.addClass("active");
+    boldStyle.mouseClicked(() => {
+      if (this.weight === "bold") {
+        this.weight = "normal";
+        boldStyle.removeClass("active");
+      } else {
+        this.weight = "bold";
+        boldStyle.addClass("active");
+      }
     });
 
     const strikethroughStyle = createImg(
@@ -146,10 +150,14 @@ class Text extends Tools {
       "Strikethrough Style"
     );
     strikethroughStyle.class("strikethroughStyle");
-    strikethroughStyle.mouseClicked(function () {
-      // TODO: strikethroughStyle
-      activeStyleHanlder();
-      strikethroughStyle.addClass("active");
+    strikethroughStyle.mouseClicked(() => {
+      if (this.decorationSThrough === "line-through") {
+        this.decorationSThrough = "none";
+        strikethroughStyle.removeClass("active");
+      } else {
+        this.decorationSThrough = "line-through";
+        strikethroughStyle.addClass("active");
+      }
     });
 
     const underlineStyle = createImg(
@@ -157,18 +165,26 @@ class Text extends Tools {
       "Underline Style"
     );
     underlineStyle.class("underlineStyle");
-    underlineStyle.mouseClicked(function () {
-      // TODO: underlineStyle
-      activeStyleHanlder();
-      underlineStyle.addClass("active");
+    underlineStyle.mouseClicked(() => {
+      if (this.underlineStyle === "underline") {
+        this.underlineStyle = "none";
+        underlineStyle.removeClass("active");
+      } else {
+        this.underlineStyle = "underline";
+        underlineStyle.addClass("active");
+      }
     });
 
     const italicStyle = createImg("../assets/italic-style.svg", "Italic Style");
     italicStyle.class("italicStyle");
-    italicStyle.mouseClicked(function () {
-      // TODO: italicStyle
-      activeStyleHanlder();
-      italicStyle.addClass("active");
+    italicStyle.mouseClicked(() => {
+      if (this.style === "italic") {
+        this.style = "normal";
+        italicStyle.removeClass("active");
+      } else {
+        this.style = "italic";
+        italicStyle.addClass("active");
+      }
     });
 
     boldStyle.parent(fontStyleContainer);
