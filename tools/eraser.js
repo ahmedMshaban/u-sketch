@@ -4,11 +4,9 @@ class Eraser extends Tools {
     this.size = new Size();
   }
 
-  draw() {
-    //console.log(this.size.value);
-  }
+  draw() {}
 
   displayConfigOptions() {
-    return  [this.size.displaySizeRange(1, 250, "eraser")];
+    return [this.size.displaySizeRange(1, 250, "eraser")];
   }
 }

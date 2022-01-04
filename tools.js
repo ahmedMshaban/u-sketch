@@ -5,8 +5,4 @@ class Tools {
     this.name = name;
     this.isDrawing = false;
   }
-
-  displayConfigOptions() {
-    return [];
-  }
 }

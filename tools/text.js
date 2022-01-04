@@ -3,6 +3,11 @@ class Text extends Tools {
     super(icon, name);
     this.color = new Color();
     this.size = 14;
+    this.currentX;
+    this.currentY;
+    this.with;
+    this.height;
+    this.drag = new Draggable();
     this.style = "normal";
     this.decorationSThrough = "none";
     this.decorationUnderline = "none";
@@ -194,10 +199,6 @@ class Text extends Tools {
 
     return fontStyleContainer;
   }
-
-  textRotateHanlder() {}
-
-  textMoveHanlder() {}
 
   displayConfigOptions() {
     return [

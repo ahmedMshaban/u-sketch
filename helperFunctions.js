@@ -17,4 +17,5 @@ function HelperFunctions() {
 	select("#saveImageButton").mouseClicked(function() {
 		saveCanvas("myPicture", "jpg");
 	});
+
 }
