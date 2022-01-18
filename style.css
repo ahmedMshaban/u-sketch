@@ -255,7 +255,7 @@ aside {
   max-height: 50px;
   max-width: 50px;
   width: 25px;
-  /*To remove
+  /*
  https://stackoverflow.com/questions/22252472/how-to-change-the-color-of-an-svg-element 
   */
   filter: invert(100%) sepia(5%) saturate(7462%) hue-rotate(88deg)

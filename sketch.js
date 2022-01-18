@@ -1,6 +1,7 @@
 //global variables that will store the toolset colour palette
 //amnd the helper functions
 let toolset = null;
+let shapes = null;
 let sidebar = null;
 var helpers = null;
 
@@ -22,6 +23,9 @@ function setup() {
   //create a toolset for storing the tools
   toolset = new ToolSet();
 
+  //create a shapes to deal with current selected shape
+  shapes = new Shapes();
+
   //add the tools to the toolset.
   toolset.addTool(new Freehand("assets/pencil.svg", "Freehand"));
   toolset.addTool(new LineTo("assets/lineTo.svg", "LineTo"));
@@ -31,6 +35,9 @@ function setup() {
   toolset.addTool(new Eraser("assets/eraser.svg", "Eraser"));
   toolset.addTool(new MirrorDraw("assets/mirror.svg", "MirrorDraw"));
   toolset.addTool(new BucketFill("assets/bucketFill.svg", "BucketFill"));
+  toolset.addTool(
+    new Shapes(shapes.selectedShape.icon, shapes.selectedShape.name)
+  );
   background(255);
 }
 
