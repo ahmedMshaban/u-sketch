@@ -315,6 +315,14 @@ aside {
   background-color: #f9b34c;
 }
 
+.toolConfig .optionsContainer .shapeOptions {
+  display: none;
+}
+
+.toolConfig .optionsContainer .shapeOptions.active {
+  display: block;
+}
+
 .sideBarItem .tooltiptext {
   visibility: hidden;
   width: auto;

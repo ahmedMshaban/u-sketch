@@ -12,6 +12,59 @@ class Shapes extends Tools {
 
   draw() {}
 
+  updateToolbar(shape) {
+    //Select the current shape image on the toolbar
+    const currentShapeImg = select(
+      "#" + this.shapesList[0].name + "sideBarItem img",
+      "#sidebar"
+    ).elt;
+    //Select the current shape tool tip on the toolbar
+    const currentShapeTP = select(
+      "#" + this.shapesList[0].name + "sideBarItem .tooltiptext",
+      "#sidebar"
+    ).elt;
+    //Update current selected shape
+    this.selectedShape = shape;
+    //Update the current shape on the toolbar
+    currentShapeImg.src = this.selectedShape.icon;
+    currentShapeImg.alt = this.selectedShape.name;
+    currentShapeTP.innerText = this.selectedShape.name;
+  }
+
+  displayShapeOptions(container) {
+    const shapeConfigOptions = createDiv();
+    shapeConfigOptions.class("optionsContainer");
+    for (const [index, shape] of this.shapesList.entries()) {
+      const shapeOptions = createDiv();
+
+      if (index === 0) {
+        shapeOptions.class("shapeOptions active");
+      } else {
+        shapeOptions.class("shapeOptions");
+      }
+
+      for (const option of shape.displayConfigOptions()) {
+        option.parent(shapeOptions);
+      }
+      shapeOptions.parent(shapeConfigOptions);
+    }
+    shapeConfigOptions.parent(container);
+  }
+
+  updateShapeOptions(targetIndex) {
+    const optionsContainer = select(
+      "#" + this.shapesList[0].name + "sideBarItem .optionsContainer",
+      "#sidebar"
+    ).elt; 
+    for(const  [currentIndex, option] of optionsContainer.childNodes.entries()) {
+      if(currentIndex !== targetIndex) {
+        option.className = "shapeOptions";
+      } else {
+        option.className = "shapeOptions active";
+      }
+    }
+  }
+
   selectShape() {
     const selContainer = createDiv("<p class='optionTitle'>Shapes</p>");
     selContainer.class("shapesContainer");
@@ -21,28 +74,17 @@ class Shapes extends Tools {
     }
     sel.selected(this.selectedShape.name);
     sel.changed(() => {
-      for (const shape of this.shapesList) {
+      for (const [index, shape] of this.shapesList.entries()) {
         if (sel.value() === shape.name) {
-          //Select the current shape image on the toolbar
-          const currentShapeImg = select(
-            "#" + this.shapesList[0].name + "sideBarItem img",
-            "#sidebar"
-          ).elt;
-          //Select the current shape tool tip on the toolbar
-          const currentShapeTP = select(
-            "#" + this.shapesList[0].name + "sideBarItem .tooltiptext",
-            "#sidebar"
-          ).elt;
-          //Update current selected shape
-          this.selectedShape = shape;
-          //Update the current shape on the toolbar
-          currentShapeImg.src = this.selectedShape.icon;
-          currentShapeImg.alt = this.selectedShape.name;
-          currentShapeTP.innerText = this.selectedShape.name;
+          this.updateToolbar(shape);
+          this.updateShapeOptions(index);
         }
       }
     });
     sel.parent(selContainer);
+
+    this.displayShapeOptions(selContainer);
+
     return selContainer;
   }
 
