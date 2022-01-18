@@ -42,7 +42,8 @@ class Shapes extends Tools {
         }
       }
     });
-    return sel.parent(selContainer);
+    sel.parent(selContainer);
+    return selContainer;
   }
 
   displayConfigOptions() {
