@@ -10,7 +10,9 @@ class Shapes extends Tools {
     this.selectedShape = this.shapesList[0];
   }
 
-  draw() {}
+  draw() {
+    this.selectedShape.draw();
+  }
 
   updateToolbar(shape) {
     //Select the current shape image on the toolbar

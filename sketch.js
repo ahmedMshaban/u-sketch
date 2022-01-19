@@ -46,8 +46,11 @@ function draw() {
   //The `in` operator will return true for direct or
   //inherited properties through the prototype chain
   //if there isn't a draw method the app will alert the user
+
   if ("draw" in toolset.selectedTool) {
-    toolset.selectedTool.draw();
+    if (Modal.status === "closed" && mouseX >= 0 && mouseY >= 0) {
+      toolset.selectedTool.draw();
+    }
   } else {
     alert("it doesn't look like your tool has a draw method!");
   }

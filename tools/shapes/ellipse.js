@@ -4,7 +4,9 @@ class Ellipse extends Tools {
       this.color = new Color();
     }
   
-    draw() {}
+    draw() {
+      console.log('hello from Ellipse');
+    }
   
     displayConfigOptions() {
       return [this.color.displayFill("Ellipse")];

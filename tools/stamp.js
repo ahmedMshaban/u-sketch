@@ -13,15 +13,20 @@ class Stamp extends Tools {
 
   draw() {
     if (mouseIsPressed) {
-      let shapeX = mouseX - this.size.value / 2;
-      let shapeY = mouseY - this.size.value / 2;
-      image(
-        this.selectedShape,
-        shapeX,
-        shapeY,
-        this.size.value,
-        this.size.value
-      );
+      if (!this.isDrawing) {
+        this.isDrawing = true;
+        let shapeX = mouseX - this.size.value / 2;
+        let shapeY = mouseY - this.size.value / 2;
+        image(
+          this.selectedShape,
+          shapeX,
+          shapeY,
+          this.size.value,
+          this.size.value
+        );
+      }
+    } else {
+      this.isDrawing = false;
     }
   }
 
