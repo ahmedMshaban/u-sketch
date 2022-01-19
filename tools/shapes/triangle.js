@@ -9,7 +9,7 @@ class Triangle extends Tools {
     if (mouseIsPressed) {
       if (!this.isDrawing) {
         this.isDrawing = true;
-        this.isFilled.status ? fill(this.color.fill) : null;
+        this.isFilled.status ? fill(this.color.fill) : noFill();
         stroke(this.color.outline);
         triangle(
           mouseX - 50,
