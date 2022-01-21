@@ -4,7 +4,15 @@ class Eraser extends Tools {
     this.size = new Size();
   }
 
-  draw() {}
+  draw() {
+    if (mouseIsPressed) {
+      push();
+      noStroke();
+      fill("white");
+      ellipse(mouseX, mouseY, this.size.value, this.size.value);
+      pop();
+    }
+  }
 
   displayConfigOptions() {
     return [this.size.displaySizeRange(1, 250, "eraser")];
