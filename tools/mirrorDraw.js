@@ -14,7 +14,7 @@ class MirrorDraw extends Tools {
     this.previousOppositeMouseX = -1;
     this.previousOppositeMouseY = -1;
 
-    this.size = new Size(1);
+    this.size = new Size();
     this.color = new Color();
   }
 

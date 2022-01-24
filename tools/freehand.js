@@ -3,7 +3,7 @@ class Freehand extends Tools {
     super(icon, name);
     this.previousMouseX = -1;
     this.previousMouseY = -1;
-    this.size = new Size(1);
+    this.size = new Size();
     this.color = new Color();
   }
 

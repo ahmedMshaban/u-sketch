@@ -7,7 +7,7 @@ class LineTo extends Tools {
     this.startMouseX = -1;
     this.startMouseY = -1;
     this.drawing = false;
-    this.size = new Size(1);
+    this.size = new Size();
     this.color = new Color();
   }
 
