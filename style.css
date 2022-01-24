@@ -395,3 +395,13 @@ Modal
   background-color: rgb(0, 0, 0);
   background-color: rgba(0, 0, 0, 0.4);
 }
+
+
+/****************************************************************
+Controller
+****************************************************************/
+.finishCahngesIcon {
+  width: 25px;
+  height: 25px;
+  cursor: pointer;
+}
