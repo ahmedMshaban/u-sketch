@@ -2,6 +2,7 @@ class Text extends Tools {
   constructor(icon, name) {
     super(icon, name);
     this.color = new Color();
+    this.controller = new Controller();
     this.size = 14;
     this.fontScalar = 0.8;
     this.fontBaseline = 0;
@@ -15,7 +16,7 @@ class Text extends Tools {
     this.decorationSThrough = "none";
     this.decorationUnderline = "none";
     this.weight = "normal";
-    this.alignment = "left";
+    this.alignment = "center";
     //Te following fonts are safe fonts for HTML and CSS and
     //available on all major operating systems and using
     //fallback fonts in case they are not available.
@@ -39,8 +40,13 @@ class Text extends Tools {
     if (mouseIsPressed) {
       if (!this.isDrawing) {
         this.isDrawing = true;
+        //Font Size
         textSize(this.size);
+
+        //Font Family
         textFont(this.selectedFont);
+
+        //Font Style
         if (this.style === "italic" && this.weight === "bold") {
           textStyle(BOLDITALIC);
         } else if (this.style === "italic") {
@@ -50,27 +56,94 @@ class Text extends Tools {
         } else {
           textStyle(NORMAL);
         }
+
+        //Font Color
         fill(this.color.fill);
+
+        //Font Stroke color
         stroke(this.color.outline);
-        this.decorationUnderline === "underline"
-          ? line(
-              mouseX,
-              mouseY + this.fontBaseline,
-              mouseX + 5 + textWidth(this.message),
-              mouseY + this.fontBaseline
-            )
-          : null;
+
+        //Text decoration Underline
+        if (this.decorationUnderline === "underline") {
+          if (this.alignment === "center" || this.alignment === "justify") {
+            line(
+              mouseX - textWidth(this.message) / 2,
+              mouseY + (textAscent() * this.fontScalar) / 2,
+              mouseX + textWidth(this.message) / 2,
+              mouseY + (textAscent() * this.fontScalar) / 2
+            );
+          } else if (this.alignment === "left") {
+            line(
+              mouseX - textWidth(this.message) / 2 - this.controller.gapX / 2,
+              mouseY + (textAscent() * this.fontScalar) / 2,
+              mouseX + textWidth(this.message) / 2 - this.controller.gapX / 2,
+              mouseY + (textAscent() * this.fontScalar) / 2
+            );
+          } else {
+            line(
+              mouseX - textWidth(this.message) / 2 + this.controller.gapX / 2,
+              mouseY + (textAscent() * this.fontScalar) / 2,
+              mouseX + textWidth(this.message) / 2 + this.controller.gapX / 2,
+              mouseY + (textAscent() * this.fontScalar) / 2
+            );
+          }
+        }
+
+        //Text decoration Through
         if (this.decorationSThrough === "line-through") {
           this.ascVal = textAscent() * this.fontScalar;
-          line(
-            mouseX,
-            mouseY + (this.fontBaseline - this.ascVal) / 2,
-            mouseX + textWidth(this.message),
-            mouseY + (this.fontBaseline - this.ascVal) / 2
+          if (this.alignment === "center" || this.alignment === "justify") {
+            line(
+              mouseX - textWidth(this.message) / 2,
+              mouseY + this.fontBaseline,
+              mouseX + textWidth(this.message) / 2,
+              mouseY + this.fontBaseline
+            );
+          } else if (this.alignment === "left") {
+            line(
+              mouseX - textWidth(this.message) / 2 - this.controller.gapX / 2,
+              mouseY + this.fontBaseline,
+              mouseX + textWidth(this.message) / 2 - this.controller.gapX / 2,
+              mouseY + this.fontBaseline
+            );
+          } else {
+            line(
+              mouseX - textWidth(this.message) / 2 + this.controller.gapX / 2,
+              mouseY + this.fontBaseline,
+              mouseX + textWidth(this.message) / 2 + this.controller.gapX / 2,
+              mouseY + this.fontBaseline
+            );
+          }
+        }
+
+        //Text Controller
+        this.controller.x = mouseX;
+        this.controller.y = mouseY + this.fontBaseline;
+        this.controller.w = textWidth(this.message);
+        this.controller.h = -textAscent();
+        this.controller.active = true;
+        this.controller.draw();
+
+        //Output the text on the correct location on the canvas and controller
+        if (this.alignment === "center" || this.alignment === "justify") {
+          text(
+            this.message,
+            mouseX - textWidth(this.message) / 2,
+            mouseY + (textAscent() * this.fontScalar) / 2
+          );
+        } else if (this.alignment === "left") {
+          text(
+            this.message,
+            mouseX - textWidth(this.message) / 2 - this.controller.gapX / 2,
+            mouseY + (textAscent() * this.fontScalar) / 2
+          );
+        } else {
+          text(
+            this.message,
+            mouseX - textWidth(this.message) / 2 + this.controller.gapX / 2,
+            mouseY + (textAscent() * this.fontScalar) / 2
           );
         }
-        // textAlign(this.alignment);
-        text(this.message, mouseX, mouseY + this.fontBaseline);
       }
     } else {
       this.isDrawing = false;
@@ -93,8 +166,6 @@ class Text extends Tools {
       "Left Text Alignment"
     );
     alignLeft.class("alignLeft");
-    //active by default
-    alignLeft.addClass("active");
     alignLeft.mouseClicked(() => {
       activeAlignmentHanlder();
       this.alignment = "left";
@@ -117,6 +188,8 @@ class Text extends Tools {
       "Center Text Alignment"
     );
     alignCenter.class("alignCenter");
+    //active by default
+    alignCenter.addClass("active");
     alignCenter.mouseClicked(() => {
       activeAlignmentHanlder();
       this.alignment = "center";
