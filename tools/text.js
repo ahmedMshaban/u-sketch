@@ -3,6 +3,9 @@ class Text extends Tools {
     super(icon, name);
     this.color = new Color();
     this.size = 14;
+    this.fontScalar = 0.8;
+    this.fontBaseline = 0;
+    this.ascVal = null;
     this.currentX;
     this.currentY;
     this.with;
@@ -29,9 +32,50 @@ class Text extends Tools {
       "Brush Script MT": "'Brush Script MT', cursive",
     };
     this.selectedFont = this.fonts["Arial"];
+    this.message = "Hello from another world";
   }
 
-  draw() {}
+  draw() {
+    if (mouseIsPressed) {
+      if (!this.isDrawing) {
+        this.isDrawing = true;
+        textSize(this.size);
+        textFont(this.selectedFont);
+        if (this.style === "italic" && this.weight === "bold") {
+          textStyle(BOLDITALIC);
+        } else if (this.style === "italic") {
+          textStyle(ITALIC);
+        } else if (this.weight === "bold") {
+          textStyle(BOLD);
+        } else {
+          textStyle(NORMAL);
+        }
+        fill(this.color.fill);
+        stroke(this.color.outline);
+        this.decorationUnderline === "underline"
+          ? line(
+              mouseX,
+              mouseY + this.fontBaseline,
+              mouseX + 5 + textWidth(this.message),
+              mouseY + this.fontBaseline
+            )
+          : null;
+        if (this.decorationSThrough === "line-through") {
+          this.ascVal = textAscent() * this.fontScalar;
+          line(
+            mouseX,
+            mouseY + (this.fontBaseline - this.ascVal) / 2,
+            mouseX + textWidth(this.message),
+            mouseY + (this.fontBaseline - this.ascVal) / 2
+          );
+        }
+        // textAlign(this.alignment);
+        text(this.message, mouseX, mouseY + this.fontBaseline);
+      }
+    } else {
+      this.isDrawing = false;
+    }
+  }
 
   textAlignHandler() {
     const textAlignContainer = createDiv();
@@ -171,11 +215,11 @@ class Text extends Tools {
     );
     underlineStyle.class("underlineStyle");
     underlineStyle.mouseClicked(() => {
-      if (this.underlineStyle === "underline") {
-        this.underlineStyle = "none";
+      if (this.decorationUnderline === "underline") {
+        this.decorationUnderline = "none";
         underlineStyle.removeClass("active");
       } else {
-        this.underlineStyle = "underline";
+        this.decorationUnderline = "underline";
         underlineStyle.addClass("active");
       }
     });

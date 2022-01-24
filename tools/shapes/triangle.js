@@ -27,7 +27,6 @@ class Triangle extends Tools {
         this.x3 = mouseX;
         this.y3 = mouseY - 50;
         triangle(this.x1, this.y1, this.x2, this.y2, this.x3, this.y3);
-        console.log(this.x1, this.y1, this.x2, this.y2, this.x3, this.y3);
       }
     } else {
       this.isDrawing = false;
