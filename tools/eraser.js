@@ -1,7 +1,7 @@
 class Eraser extends Tools {
   constructor(icon, name) {
     super(icon, name);
-    this.size = new Size();
+    this.size = new Size(1);
   }
 
   draw() {

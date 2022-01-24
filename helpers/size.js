@@ -1,7 +1,7 @@
 class Size {
-  constructor() {
+  constructor(defaultValue = 1) {
     this.title = "Size";
-    this.value = null;
+    this.value = defaultValue;
   }
 
   displaySizeRange(min, max, className, title = "") {

@@ -8,7 +8,7 @@ class Stamp extends Tools {
       "Thumbs down": loadImage("../assets/thumbs-down.svg"),
     };
     this.selectedShape = this.shapes["Heart"];
-    this.size = new Size();
+    this.size = new Size(40);
   }
 
   draw() {
