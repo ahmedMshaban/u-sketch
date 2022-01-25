@@ -25,7 +25,7 @@ class SprayCan extends Tools {
       `<p class="optionTitle">Points <span class="optionValue">${this.points}</span></p>`
     );
     pointsObj.class(`optionContainer sprayCan`);
-    inp.class('points sizeRange slider');
+    inp.class("points sizeRange slider");
     inp.input((e) => {
       select(".optionValue", pointsObj).elt.innerHTML = e.target.value;
       this.points = +e.target.value;
@@ -40,7 +40,7 @@ class SprayCan extends Tools {
       `<p class="optionTitle">Spread <span class="optionValue">${this.spread}</span></p>`
     );
     spreadObj.class(`optionContainer sprayCan`);
-    inp.class('spread sizeRange slider');
+    inp.class("spread sizeRange slider");
     inp.input((e) => {
       select(".optionValue", spreadObj).elt.innerHTML = e.target.value;
       this.spread = +e.target.value;
@@ -53,7 +53,7 @@ class SprayCan extends Tools {
     return [
       this.color.displayOutline("sprayCan"),
       this.pointsHanlder(),
-      this.spreadHanlder()
+      this.spreadHanlder(),
     ];
   }
 }

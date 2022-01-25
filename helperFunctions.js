@@ -14,6 +14,7 @@ function HelperFunctions() {
   select("#finishButton").mouseClicked(function () {
     updatePixels();
     Controller.active = false;
+	select("#finishButton").removeClass("active");
   });
 
   //event handler for the save image button. saves the canvsa to the

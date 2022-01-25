@@ -217,6 +217,16 @@ header #undoButton svg {
   fill: #fff;
 }
 
+header #finishButton,
+header #discardButton {
+  display: none
+}
+
+header #finishButton.active,
+header #discardButton.active {
+  display: block;
+}
+
 header button:hover {
   background-color: rgba(0, 0, 0, 0.2);
 }
@@ -405,3 +415,4 @@ Controller
   height: 25px;
   cursor: pointer;
 }
+

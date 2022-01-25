@@ -19,8 +19,13 @@ class Controller {
       noFill();
       stroke("gray");
       rect(this.x, this.y, this.w + this.gapX, this.h - this.gapY);
+      this.showFinishButton();
       pop();
     }
+  }
+
+  showFinishButton() {
+    select("#finishButton").addClass("active");
   }
 
   options() {}
