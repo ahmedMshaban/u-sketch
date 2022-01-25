@@ -38,15 +38,19 @@ class Text extends Tools {
 
   draw() {
     if (mouseIsPressed) {
-      if(!this.isDrawing) {
+      //if he is not drawing
+      if (!this.isDrawing) {
         this.isDrawing = true;
-        Controller.active = true;
         this.displayText();
-      } else if(Controller.active === false) {
+        // loadPixels();
+        Controller.active = true;
+        this.displayController();
+      } else if (Controller.active === false) {
+        //If he saved the shape
         this.isDrawing = false;
+        // updatePixels();
       }
     }
-   
   }
 
   displayText() {
@@ -126,14 +130,6 @@ class Text extends Tools {
       }
     }
 
-    //Text Controller
-    this.controller.x = mouseX;
-    this.controller.y = mouseY + this.fontBaseline;
-    this.controller.w = textWidth(this.message);
-    this.controller.h = -textAscent();
-
-    Controller.active ? this.controller.draw() : null;
-
     //Output the text on the correct location on the canvas and controller
     if (this.alignment === "center" || this.alignment === "justify") {
       text(
@@ -154,6 +150,16 @@ class Text extends Tools {
         mouseY + (textAscent() * this.fontScalar) / 2
       );
     }
+  }
+
+  displayController() {
+    //Text Controller
+    this.controller.x = mouseX;
+    this.controller.y = mouseY + this.fontBaseline;
+    this.controller.w = textWidth(this.message);
+    this.controller.h = -textAscent();
+
+    Controller.active ? this.controller.draw() : null;
   }
 
   textAlignHandler() {

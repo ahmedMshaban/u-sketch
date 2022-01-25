@@ -13,25 +13,14 @@ class Controller {
 
   draw() {
     if (Controller.active) {
+      loadPixels();
       push();
       rectMode(CENTER);
       noFill();
       stroke("gray");
       rect(this.x, this.y, this.w + this.gapX, this.h - this.gapY);
-      this.finish();
       pop();
     }
-  }
-
-  discard() {}
-
-  finish() {
-    let img = createImg("../assets/finish.svg", "finishChanges");
-    img.elt.className = "finishCahngesIcon";
-    img.position(this.x, this.y + this.h + this.gapY + this.imgSize);
-    img.mouseClicked(() => {
-        Controller.active = false;
-    });
   }
 
   options() {}
