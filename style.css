@@ -213,18 +213,18 @@ header svg {
 }
 
 header #clearButton svg,
-header #undoButton svg {
+header #undoButton svg,
+header #discardButton svg,
+header #finishButton svg {
   fill: #fff;
 }
 
-header #finishButton,
-header #discardButton {
+header .controller-buttons {
   display: none
 }
 
-header #finishButton.active,
-header #discardButton.active {
-  display: block;
+header .controller-buttons.active {
+  display: flex;
 }
 
 header button:hover {
