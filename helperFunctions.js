@@ -7,7 +7,7 @@ function HelperFunctions() {
   select("#clearButton").mouseClicked(function () {
     if (Controller.active === true) {
       alert(
-        "You can't clear while you are editing saved/discard changes first!"
+        "You can't clear while you are editing save/discard changes first!"
       );
     } else {
       background(255, 255, 255);

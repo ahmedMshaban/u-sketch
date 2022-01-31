@@ -8,6 +8,16 @@ const displayToolConfig = function (currentItem, tools) {
 };
 
 const toolbarItemClick = function (currentItem, tools) {
+  //Don't select a new tool if we need a save/discard decision
+  //accept the currently active tool!
+  if (
+    Controller.active === true &&
+    !currentItem.elt.className.includes("active")
+  ) {
+    alert("Please save/discard changes first before you select a new tool!");
+    return;
+  }
+
   //remove any existing active class
   const items = selectAll(".sideBarItem");
   for (const item of items) {
