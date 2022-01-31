@@ -68,6 +68,8 @@ class Text extends Tools {
           this.displayText();
           //reset the finishChanges status
           Controller.finishChanges = false;
+          //save the pixels with the most recent draw
+          loadPixels();
         }
       }
 
