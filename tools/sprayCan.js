@@ -16,6 +16,9 @@ class SprayCan extends Tools {
           random(mouseY - this.spread, mouseY + this.spread)
         );
       }
+    } else {
+      //save the pixels with the most recent draw
+      loadPixels();
     }
   }
 

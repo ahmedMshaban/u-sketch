@@ -19,8 +19,6 @@ const toolbarItemClick = function (currentItem, tools) {
   tools.selectTool(toolName);
   displayToolConfig(currentItem, tools);
   Modal.show();
-  //call loadPixels to make sure most recent changes are saved to pixel array
-  loadPixels();
 };
 
 //add the tool info to the html page
@@ -45,7 +43,7 @@ const addToolInfo = function (icon, name, configs) {
   for (const config of configs) {
     config.parent(toolConfigs);
   }
-  
+
   //sidebartooltip
   sideBarTip.parent(sideBarItem);
   sideBarTip.class("tooltiptext");

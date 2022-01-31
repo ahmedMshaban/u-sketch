@@ -1,5 +1,6 @@
 class Controller {
-  static active = true;
+  static active = false;
+  static finishChanges = false;
 
   constructor(posX = 0, posY = 0, width = 0, height = 0) {
     this.x = posX;
@@ -13,7 +14,6 @@ class Controller {
 
   draw() {
     if (Controller.active) {
-      loadPixels();
       push();
       rectMode(CENTER);
       noFill();

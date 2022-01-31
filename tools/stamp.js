@@ -27,6 +27,8 @@ class Stamp extends Tools {
       }
     } else {
       this.isDrawing = false;
+      //save the pixels with the most recent draw
+      loadPixels();
     }
   }
 

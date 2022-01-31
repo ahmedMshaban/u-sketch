@@ -7,8 +7,10 @@ class Text extends Tools {
     this.fontScalar = 0.8;
     this.fontBaseline = 0;
     this.ascVal = null;
-    this.currentX;
-    this.currentY;
+    //where was the mouse on the last time draw was called.
+    //set it to -1 to begin with
+    this.previousMouseX = -1;
+    this.previousMouseY = -1;
     this.with;
     this.height;
     this.drag = new Draggable();
@@ -38,17 +40,43 @@ class Text extends Tools {
 
   draw() {
     if (mouseIsPressed) {
-      //if he is not drawing
+      //I'm not drawing
       if (!this.isDrawing) {
+        loadPixels();
+        //I'm drawing now...
         this.isDrawing = true;
+        //Save the current mouse location
+        this.previousMouseX = mouseX;
+        this.previousMouseY = mouseY;
+
+        //Display Text, open the controller and show it.
         this.displayText();
-        // loadPixels();
         Controller.active = true;
         this.displayController();
-      } else if (Controller.active === false) {
-        //If he saved the shape
+      }
+    } else {
+      //Chceck if I finish/discard changes
+      if (Controller.active === false && this.isDrawing) {
+        //Then stop drawing
         this.isDrawing = false;
-        // updatePixels();
+        //Did I save cahnges?
+        if (Controller.finishChanges === true) {
+          //clear the background and load the last saved pixels
+          //then re draw the text but without the controller
+          background(255);
+          updatePixels();
+          this.displayText();
+          //reset the finishChanges status
+          Controller.finishChanges = false;
+        }
+      }
+
+      //Am I still drawing?
+      else if (this.isDrawing) {
+        background(255);
+        updatePixels();
+        this.displayText();
+        this.displayController();
       }
     }
   }
@@ -81,24 +109,32 @@ class Text extends Tools {
     if (this.decorationUnderline === "underline") {
       if (this.alignment === "center" || this.alignment === "justify") {
         line(
-          mouseX - textWidth(this.message) / 2,
-          mouseY + (textAscent() * this.fontScalar) / 2,
-          mouseX + textWidth(this.message) / 2,
-          mouseY + (textAscent() * this.fontScalar) / 2
+          this.previousMouseX - textWidth(this.message) / 2,
+          this.previousMouseY + (textAscent() * this.fontScalar) / 2,
+          this.previousMouseX + textWidth(this.message) / 2,
+          this.previousMouseY + (textAscent() * this.fontScalar) / 2
         );
       } else if (this.alignment === "left") {
         line(
-          mouseX - textWidth(this.message) / 2 - this.controller.gapX / 2,
-          mouseY + (textAscent() * this.fontScalar) / 2,
-          mouseX + textWidth(this.message) / 2 - this.controller.gapX / 2,
-          mouseY + (textAscent() * this.fontScalar) / 2
+          this.previousMouseX -
+            textWidth(this.message) / 2 -
+            this.controller.gapX / 2,
+          this.previousMouseY + (textAscent() * this.fontScalar) / 2,
+          this.previousMouseX +
+            textWidth(this.message) / 2 -
+            this.controller.gapX / 2,
+          this.previousMouseY + (textAscent() * this.fontScalar) / 2
         );
       } else {
         line(
-          mouseX - textWidth(this.message) / 2 + this.controller.gapX / 2,
-          mouseY + (textAscent() * this.fontScalar) / 2,
-          mouseX + textWidth(this.message) / 2 + this.controller.gapX / 2,
-          mouseY + (textAscent() * this.fontScalar) / 2
+          this.previousMouseX -
+            textWidth(this.message) / 2 +
+            this.controller.gapX / 2,
+          this.previousMouseY + (textAscent() * this.fontScalar) / 2,
+          this.previousMouseX +
+            textWidth(this.message) / 2 +
+            this.controller.gapX / 2,
+          this.previousMouseY + (textAscent() * this.fontScalar) / 2
         );
       }
     }
@@ -108,24 +144,32 @@ class Text extends Tools {
       this.ascVal = textAscent() * this.fontScalar;
       if (this.alignment === "center" || this.alignment === "justify") {
         line(
-          mouseX - textWidth(this.message) / 2,
-          mouseY + this.fontBaseline,
-          mouseX + textWidth(this.message) / 2,
-          mouseY + this.fontBaseline
+          this.previousMouseX - textWidth(this.message) / 2,
+          this.previousMouseY + this.fontBaseline,
+          this.previousMouseX + textWidth(this.message) / 2,
+          this.previousMouseY + this.fontBaseline
         );
       } else if (this.alignment === "left") {
         line(
-          mouseX - textWidth(this.message) / 2 - this.controller.gapX / 2,
-          mouseY + this.fontBaseline,
-          mouseX + textWidth(this.message) / 2 - this.controller.gapX / 2,
-          mouseY + this.fontBaseline
+          this.previousMouseX -
+            textWidth(this.message) / 2 -
+            this.controller.gapX / 2,
+          this.previousMouseY + this.fontBaseline,
+          this.previousMouseX +
+            textWidth(this.message) / 2 -
+            this.controller.gapX / 2,
+          this.previousMouseY + this.fontBaseline
         );
       } else {
         line(
-          mouseX - textWidth(this.message) / 2 + this.controller.gapX / 2,
-          mouseY + this.fontBaseline,
-          mouseX + textWidth(this.message) / 2 + this.controller.gapX / 2,
-          mouseY + this.fontBaseline
+          this.previousMouseX -
+            textWidth(this.message) / 2 +
+            this.controller.gapX / 2,
+          this.previousMouseY + this.fontBaseline,
+          this.previousMouseX +
+            textWidth(this.message) / 2 +
+            this.controller.gapX / 2,
+          this.previousMouseY + this.fontBaseline
         );
       }
     }
@@ -134,28 +178,32 @@ class Text extends Tools {
     if (this.alignment === "center" || this.alignment === "justify") {
       text(
         this.message,
-        mouseX - textWidth(this.message) / 2,
-        mouseY + (textAscent() * this.fontScalar) / 2
+        this.previousMouseX - textWidth(this.message) / 2,
+        this.previousMouseY + (textAscent() * this.fontScalar) / 2
       );
     } else if (this.alignment === "left") {
       text(
         this.message,
-        mouseX - textWidth(this.message) / 2 - this.controller.gapX / 2,
-        mouseY + (textAscent() * this.fontScalar) / 2
+        this.previousMouseX -
+          textWidth(this.message) / 2 -
+          this.controller.gapX / 2,
+        this.previousMouseY + (textAscent() * this.fontScalar) / 2
       );
     } else {
       text(
         this.message,
-        mouseX - textWidth(this.message) / 2 + this.controller.gapX / 2,
-        mouseY + (textAscent() * this.fontScalar) / 2
+        this.previousMouseX -
+          textWidth(this.message) / 2 +
+          this.controller.gapX / 2,
+        this.previousMouseY + (textAscent() * this.fontScalar) / 2
       );
     }
   }
 
   displayController() {
     //Text Controller
-    this.controller.x = mouseX;
-    this.controller.y = mouseY + this.fontBaseline;
+    this.controller.x = this.previousMouseX;
+    this.controller.y = this.previousMouseY + this.fontBaseline;
     this.controller.w = textWidth(this.message);
     this.controller.h = -textAscent();
 

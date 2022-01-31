@@ -11,6 +11,9 @@ class Eraser extends Tools {
       fill("white");
       ellipse(mouseX, mouseY, this.size.value, this.size.value);
       pop();
+    } else {
+      //save the pixels with the most recent draw
+      loadPixels();
     }
   }
 

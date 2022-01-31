@@ -5,22 +5,37 @@ function HelperFunctions() {
 
   //event handler for the clear button event. Clears the screen
   select("#clearButton").mouseClicked(function () {
-    background(255, 255, 255);
-    //call loadPixels to update the drawing state
-    //this is needed for the mirror tool
-    loadPixels();
+    if (Controller.active === true) {
+      alert(
+        "You can't clear while you are editing saved/discard changes first!"
+      );
+    } else {
+      background(255, 255, 255);
+      //call loadPixels to update the drawing state
+      //this is needed for the mirror tool
+      loadPixels();
+    }
   });
 
   select("#finishButton").mouseClicked(function () {
-    updatePixels();
+    Controller.finishChanges = true;
     Controller.active = false;
-	select(".controller-buttons").removeClass("active");
+    select(".controller-buttons").removeClass("active");
   });
 
   select("#discardButton").mouseClicked(function () {
-	//To Do something
-	select(".controller-buttons").removeClass("active");
+    //To Do something
+    updatePixels();
+    Controller.active = false;
+    select(".controller-buttons").removeClass("active");
   });
+
+
+  select("#undoButton").mouseClicked(function () {
+    //To Do something
+    updatePixels();
+  });
+  
 
   //event handler for the save image button. saves the canvsa to the
   //local file system.

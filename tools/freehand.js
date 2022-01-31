@@ -37,6 +37,8 @@ class Freehand extends Tools {
     else {
       this.previousMouseX = -1;
       this.previousMouseY = -1;
+      //save the pixels with the most recent draw
+      loadPixels();
     }
   }
 
