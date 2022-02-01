@@ -33,7 +33,6 @@ class Freehand extends Tools {
     }
     //if the user has released the mouse we want to set the previousMouse values
     //back to -1.
-    //try and comment out these lines and see what happens!
     else {
       this.previousMouseX = -1;
       this.previousMouseY = -1;

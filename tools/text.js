@@ -11,8 +11,8 @@ class Text extends Tools {
     //set it to -1 to begin with
     this.previousMouseX = -1;
     this.previousMouseY = -1;
-    this.with;
-    this.height;
+    this.with = 0;
+    this.height = 0;
     this.drag = new Draggable();
     this.style = "normal";
     this.decorationSThrough = "none";
@@ -54,6 +54,17 @@ class Text extends Tools {
         Controller.active = true;
         this.displayController();
       }
+
+      this.drag.pressed(
+        this.previousMouseX -
+          textWidth(this.message) / 2 -
+          this.controller.gapX / 2,
+        this.previousMouseY +
+          (textAscent() * this.fontScalar) / 2 +
+          this.controller.gapY / 2,
+        this.with + this.controller.gapX,
+        this.height - this.controller.gapY
+      );
     } else {
       //Chceck if I finish/discard changes
       if (Controller.active === false && this.isDrawing) {
@@ -80,6 +91,39 @@ class Text extends Tools {
         this.displayText();
         this.displayController();
       }
+
+      // Quit dragging
+      this.drag.released();
+    }
+
+
+    if (this.isDrawing) {
+      //If I'm dragging
+      if (this.drag.dragging) {
+        background(255);
+        //Save the current mouse location
+        this.previousMouseX = mouseX;
+        this.previousMouseY = mouseY;
+        updatePixels();
+        this.displayText();
+        this.displayController();
+      }
+
+      //Is mouse over text
+      this.drag.over(
+        this.previousMouseX -
+          textWidth(this.message) / 2 -
+          this.controller.gapX / 2,
+        this.previousMouseY +
+          (textAscent() * this.fontScalar) / 2 +
+          this.controller.gapY / 2,
+        this.with + this.controller.gapX, //The extra gap on left and right
+        this.height - this.controller.gapY //The extra gap on top and bottom
+      );
+
+      //Change cursor based on the current mouse location
+      this.drag.show();
+
     }
   }
 
@@ -208,6 +252,10 @@ class Text extends Tools {
     this.controller.y = this.previousMouseY + this.fontBaseline;
     this.controller.w = textWidth(this.message);
     this.controller.h = -textAscent();
+
+    //So we can usee later to handle the drag functionality.
+    this.with = this.controller.w;
+    this.height = this.controller.h;
 
     Controller.active ? this.controller.draw() : null;
   }

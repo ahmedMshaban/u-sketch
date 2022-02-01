@@ -29,12 +29,6 @@ function HelperFunctions() {
     Controller.active = false;
     select(".controller-buttons").removeClass("active");
   });
-
-
-  select("#undoButton").mouseClicked(function () {
-    //To Do something
-    updatePixels();
-  });
   
 
   //event handler for the save image button. saves the canvsa to the

@@ -6,13 +6,44 @@ class Draggable {
     this.rollover = false;
   }
 
-  over(objectX, objectY) {}
+  over(objectX, objectY, objectW, objectH) {
+    // Is mouse over object
+    if (
+      mouseX > objectX &&
+      mouseX < objectX + objectW &&
+      mouseY < objectY &&
+      mouseY > objectY + objectH
+    ) {
+      this.rollover = true;
+    } else {
+      this.rollover = false;
+    }
+  }
 
-  update(objectX, objectY) {}
+  show() {
+    if (this.rollover) {
+      cursor("grab");
+    } else {
+      cursor("auto");
+    }
+  }
 
-  show(objectX, objectY, objectW, objectH) {}
+  pressed(objectX, objectY, objectW, objectH) {
+    // Did I click on the Object?
+    if (
+      mouseX > objectX &&
+      mouseX < objectX + objectW &&
+      mouseY < objectY &&
+      mouseY > objectY + objectH
+    ) {
+      this.dragging = true;
+      this.offsetX = objectX - mouseX;
+      this.offsetY = objectY - mouseY;
+    }
+  }
 
-  pressed(objectX, objectY, objectW, objectH) {}
-
-  released() {}
+  released() {
+    // Quit dragging
+    this.dragging = false;
+  }
 }
