@@ -19,7 +19,7 @@ class Text extends Tools {
     this.decorationUnderline = "none";
     this.weight = "normal";
     this.alignment = "center";
-    //Te following fonts are safe fonts for HTML and CSS and
+    //The following fonts are safe fonts for HTML and CSS and
     //available on all major operating systems and using
     //fallback fonts in case they are not available.
     this.fonts = {
@@ -35,7 +35,7 @@ class Text extends Tools {
       "Brush Script MT": "'Brush Script MT', cursive",
     };
     this.selectedFont = this.fonts["Arial"];
-    this.message = "Hello from another world";
+    this.message = "Silence is golden...";
   }
 
   draw() {
@@ -96,7 +96,6 @@ class Text extends Tools {
       this.drag.released();
     }
 
-
     if (this.isDrawing) {
       //If I'm dragging
       if (this.drag.dragging) {
@@ -123,11 +122,13 @@ class Text extends Tools {
 
       //Change cursor based on the current mouse location
       this.drag.show();
-
     }
   }
 
   displayText() {
+    //Make sure we capture the latest message
+    this.message = select(".textInput").value();
+
     //Font Size
     textSize(this.size);
 
@@ -427,8 +428,15 @@ class Text extends Tools {
     return fontStyleContainer;
   }
 
+  textContentHandler() {
+    const inp = createInput(this.message);
+    inp.class("textInput");
+    return inp;
+  }
+
   displayConfigOptions() {
     return [
+      this.textContentHandler(),
       this.color.displayFill("text"),
       this.color.displayOutline("text"),
       this.fontFamilyHandler(),
