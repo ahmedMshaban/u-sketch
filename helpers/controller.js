@@ -27,6 +27,4 @@ class Controller {
   showControllerButtons() {
     select(".controller-buttons").addClass("active");
   }
-
-  options() {}
 }
