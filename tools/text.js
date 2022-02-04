@@ -153,37 +153,42 @@ class Text extends Tools {
     //Font Stroke color
     stroke(this.color.outline);
 
+    // Change the mode to DEGREES
+    angleMode(DEGREES);
+
     //Text decoration Underline
     if (this.decorationUnderline === "underline") {
       if (this.alignment === "center" || this.alignment === "justify") {
-        line(
+        push();
+        translate(
           this.previousMouseX - textWidth(this.message) / 2,
-          this.previousMouseY + (textAscent() * this.fontScalar) / 2,
-          this.previousMouseX + textWidth(this.message) / 2,
           this.previousMouseY + (textAscent() * this.fontScalar) / 2
         );
+        rotate(this.rotateDegree);
+        line(0, 0, textWidth(this.message), 0);
+        pop();
       } else if (this.alignment === "left") {
-        line(
+        push();
+        translate(
           this.previousMouseX -
-            textWidth(this.message) / 2 -
-            this.controller.gapX / 2,
-          this.previousMouseY + (textAscent() * this.fontScalar) / 2,
-          this.previousMouseX +
             textWidth(this.message) / 2 -
             this.controller.gapX / 2,
           this.previousMouseY + (textAscent() * this.fontScalar) / 2
         );
+        rotate(this.rotateDegree);
+        line(0, 0, textWidth(this.message), 0);
+        pop();
       } else {
-        line(
+        push();
+        translate(
           this.previousMouseX -
-            textWidth(this.message) / 2 +
-            this.controller.gapX / 2,
-          this.previousMouseY + (textAscent() * this.fontScalar) / 2,
-          this.previousMouseX +
             textWidth(this.message) / 2 +
             this.controller.gapX / 2,
           this.previousMouseY + (textAscent() * this.fontScalar) / 2
         );
+        rotate(this.rotateDegree);
+        line(0, 0, textWidth(this.message), 0);
+        pop();
       }
     }
 
@@ -191,39 +196,38 @@ class Text extends Tools {
     if (this.decorationSThrough === "line-through") {
       this.ascVal = textAscent() * this.fontScalar;
       if (this.alignment === "center" || this.alignment === "justify") {
-        line(
+        push();
+        translate(
           this.previousMouseX - textWidth(this.message) / 2,
-          this.previousMouseY + this.fontBaseline,
-          this.previousMouseX + textWidth(this.message) / 2,
           this.previousMouseY + this.fontBaseline
         );
+        rotate(this.rotateDegree);
+        line(0, 0, textWidth(this.message), 0);
+        pop();
       } else if (this.alignment === "left") {
-        line(
+        push();
+        translate(
           this.previousMouseX -
-            textWidth(this.message) / 2 -
-            this.controller.gapX / 2,
-          this.previousMouseY + this.fontBaseline,
-          this.previousMouseX +
             textWidth(this.message) / 2 -
             this.controller.gapX / 2,
           this.previousMouseY + this.fontBaseline
         );
+        rotate(this.rotateDegree);
+        line(0, 0, textWidth(this.message), 0);
+        pop();
       } else {
-        line(
+        push();
+        translate(
           this.previousMouseX -
-            textWidth(this.message) / 2 +
-            this.controller.gapX / 2,
-          this.previousMouseY + this.fontBaseline,
-          this.previousMouseX +
             textWidth(this.message) / 2 +
             this.controller.gapX / 2,
           this.previousMouseY + this.fontBaseline
         );
+        rotate(this.rotateDegree);
+        line(0, 0, textWidth(this.message), 0);
+        pop();
       }
     }
-
-    // Change the mode to DEGREES
-    angleMode(DEGREES);
 
     //Output the text on the correct location on the canvas and controller
     if (this.alignment === "center" || this.alignment === "justify") {
