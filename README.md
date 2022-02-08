@@ -1,6 +1,6 @@
 # u-sketch
 
 Postpone
-- Rotate
+- Rotate Degree with text through.
 - Undo
 
