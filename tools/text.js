@@ -36,7 +36,7 @@ class Text extends Tools {
     };
     this.selectedFont = this.fonts["Arial"];
     this.message = "Silence is golden...";
-    this.rotateDegree = 0;
+    this.rotate = new Rotate();
   }
 
   draw() {
@@ -164,7 +164,7 @@ class Text extends Tools {
           this.previousMouseX - textWidth(this.message) / 2,
           this.previousMouseY + (textAscent() * this.fontScalar) / 2
         );
-        rotate(this.rotateDegree);
+        rotate(this.rotate.degree);
         line(0, 0, textWidth(this.message), 0);
         pop();
       } else if (this.alignment === "left") {
@@ -175,7 +175,7 @@ class Text extends Tools {
             this.controller.gapX / 2,
           this.previousMouseY + (textAscent() * this.fontScalar) / 2
         );
-        rotate(this.rotateDegree);
+        rotate(this.rotate.degree);
         line(0, 0, textWidth(this.message), 0);
         pop();
       } else {
@@ -186,7 +186,7 @@ class Text extends Tools {
             this.controller.gapX / 2,
           this.previousMouseY + (textAscent() * this.fontScalar) / 2
         );
-        rotate(this.rotateDegree);
+        rotate(this.rotate.degree);
         line(0, 0, textWidth(this.message), 0);
         pop();
       }
@@ -201,7 +201,7 @@ class Text extends Tools {
           this.previousMouseX - textWidth(this.message) / 2,
           this.previousMouseY + this.fontBaseline
         );
-        rotate(this.rotateDegree);
+        rotate(this.rotate.degree);
         line(0, 0, textWidth(this.message), 0);
         pop();
       } else if (this.alignment === "left") {
@@ -212,7 +212,7 @@ class Text extends Tools {
             this.controller.gapX / 2,
           this.previousMouseY + this.fontBaseline
         );
-        rotate(this.rotateDegree);
+        rotate(this.rotate.degree);
         line(0, 0, textWidth(this.message), 0);
         pop();
       } else {
@@ -223,7 +223,7 @@ class Text extends Tools {
             this.controller.gapX / 2,
           this.previousMouseY + this.fontBaseline
         );
-        rotate(this.rotateDegree);
+        rotate(this.rotate.degree);
         line(0, 0, textWidth(this.message), 0);
         pop();
       }
@@ -236,7 +236,7 @@ class Text extends Tools {
         this.previousMouseX - textWidth(this.message) / 2,
         this.previousMouseY + (textAscent() * this.fontScalar) / 2
       );
-      rotate(this.rotateDegree);
+      rotate(this.rotate.degree);
       text(this.message, 0, 0);
       pop();
     } else if (this.alignment === "left") {
@@ -247,7 +247,7 @@ class Text extends Tools {
           this.controller.gapX / 2,
         this.previousMouseY + (textAscent() * this.fontScalar) / 2
       );
-      rotate(this.rotateDegree);
+      rotate(this.rotate.degree);
       text(this.message, 0, 0);
       pop();
     } else {
@@ -258,7 +258,7 @@ class Text extends Tools {
           this.controller.gapX / 2,
         this.previousMouseY + (textAscent() * this.fontScalar) / 2
       );
-      rotate(this.rotateDegree);
+      rotate(this.rotate.degree);
       text(this.message, 0, 0);
       pop();
     }
@@ -451,25 +451,6 @@ class Text extends Tools {
     return inp;
   }
 
-  rotateDegreeHandler() {
-    const inpContainer = createDiv(
-      `<p class='optionTitle'>Rotate Degree: <span class='optionValue'>${this.rotateDegree}</span><sup>°</sup></p>`
-    );
-    inpContainer.class("rotateDegreeContainer");
-    const inp = createInput(this.rotateDegree, "number");
-    inp.class("rotateInput");
-    inp.input((e) => {
-      if (+inp.value() <= 360 && +inp.value() >= 0) {
-        this.rotateDegree = +inp.value();
-        select(".optionValue", inpContainer).elt.innerHTML = e.target.value;
-      } else {
-        alert("Please enter value between 0 and 360");
-      }
-    });
-    inp.parent(inpContainer);
-    return inpContainer;
-  }
-
   displayConfigOptions() {
     return [
       this.textContentHandler(),
@@ -477,7 +458,7 @@ class Text extends Tools {
       this.color.displayOutline("text"),
       this.fontFamilyHandler(),
       this.fontSizeHandler(),
-      this.rotateDegreeHandler(),
+      this.rotate.displayOptions(),
       this.textAlignHandler(),
       this.fontStyleHandler(),
     ];
