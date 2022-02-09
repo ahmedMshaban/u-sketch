@@ -9,8 +9,7 @@ class Rectangle extends Tools {
     this.previousMouseX = -1;
     this.previousMouseY = -1;
     this.width = 200;
-    this.height = 100;
-    this.rotate = new Rotate();
+    this.height = 100;  
   }
 
   draw() {
