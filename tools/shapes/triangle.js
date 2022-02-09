@@ -132,16 +132,15 @@ class Triangle extends Tools {
   }
 
   displayTriangle() {
+    // Change the mode to DEGREES
+    angleMode(DEGREES);
+    push();
     this.isFilled.status ? fill(this.color.fill) : noFill();
     stroke(this.color.outline);
-    triangle(
-      this.x1 - this.side,
-      this.y1 + this.side,
-      this.x2 + this.side,
-      this.y2 + this.side,
-      this.x3,
-      this.y3 - this.side
-    );
+    translate(this.x1, this.y1);
+    rotate(this.rotate.degree);
+    triangle(-this.side, this.side, this.side, this.side, 0, -this.side);
+    pop();
   }
 
   displayConfigOptions() {
