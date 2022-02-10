@@ -139,7 +139,7 @@ class RegularPolygon extends Tools {
     return inpContainer;
   }
 
-  displaynumOfPoints() {
+  displayNumOfPoints() {
     const inpContainer = createDiv(
       `<p class='optionTitle'>Number Of Points:: <span class='optionValue'>${this.points}</span></p>`
     );
@@ -158,7 +158,7 @@ class RegularPolygon extends Tools {
     return [
       this.rotate.displayOptions(),
       this.displayRadius(),
-      this.displaynumOfPoints(),
+      this.displayNumOfPoints(),
       this.color.displayFill("RegularPolygon"),
       this.color.displayOutline("RegularPolygon"),
       this.isFilled.displayConfigOptions(),

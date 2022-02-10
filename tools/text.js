@@ -57,14 +57,10 @@ class Text extends Tools {
       }
 
       this.drag.pressed(
-        this.previousMouseX -
-          textWidth(this.message) / 2 -
-          this.controller.gapX / 2,
-        this.previousMouseY +
-          (textAscent() * this.fontScalar) / 2 +
-          this.controller.gapY / 2,
-        this.with + this.controller.gapX,
-        this.height - this.controller.gapY
+        this.previousMouseX - this.controller.w / 2,
+        this.previousMouseY - this.controller.h / 2,
+        this.controller.w +  this.controller.w / 2,
+        this.controller.h +  this.controller.h / 2
       );
     } else {
       //Chceck if I finish/discard changes
@@ -111,14 +107,10 @@ class Text extends Tools {
 
       //Is mouse over text
       this.drag.over(
-        this.previousMouseX -
-          textWidth(this.message) / 2 -
-          this.controller.gapX / 2,
-        this.previousMouseY +
-          (textAscent() * this.fontScalar) / 2 +
-          this.controller.gapY / 2,
-        this.with + this.controller.gapX, //The extra gap on left and right
-        this.height - this.controller.gapY //The extra gap on top and bottom
+        this.previousMouseX - this.controller.w / 2,
+        this.previousMouseY - this.controller.h / 2,
+        this.controller.w +  this.controller.w / 2,
+        this.controller.h +  this.controller.h / 2
       );
 
       //Change cursor based on the current mouse location
@@ -267,9 +259,9 @@ class Text extends Tools {
   displayController() {
     //Text Controller
     this.controller.x = this.previousMouseX;
-    this.controller.y = this.previousMouseY + this.fontBaseline;
-    this.controller.w = textWidth(this.message);
-    this.controller.h = -textAscent();
+    this.controller.y = this.previousMouseY;
+    this.controller.w = 10;
+    this.controller.h = 10;
 
     //So we can usee later to handle the drag functionality.
     this.with = this.controller.w;
