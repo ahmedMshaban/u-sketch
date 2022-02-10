@@ -59,8 +59,8 @@ class Text extends Tools {
       this.drag.pressed(
         this.previousMouseX - this.controller.w / 2,
         this.previousMouseY - this.controller.h / 2,
-        this.controller.w +  this.controller.w / 2,
-        this.controller.h +  this.controller.h / 2
+        this.controller.w + this.controller.w / 2,
+        this.controller.h + this.controller.h / 2
       );
     } else {
       //Chceck if I finish/discard changes
@@ -109,8 +109,8 @@ class Text extends Tools {
       this.drag.over(
         this.previousMouseX - this.controller.w / 2,
         this.previousMouseY - this.controller.h / 2,
-        this.controller.w +  this.controller.w / 2,
-        this.controller.h +  this.controller.h / 2
+        this.controller.w + this.controller.w / 2,
+        this.controller.h + this.controller.h / 2
       );
 
       //Change cursor based on the current mouse location
@@ -150,110 +150,68 @@ class Text extends Tools {
 
     //Text decoration Underline
     if (this.decorationUnderline === "underline") {
+      push();
+      translate(this.previousMouseX, this.previousMouseY);
+      rotate(this.rotate.degree);
       if (this.alignment === "center" || this.alignment === "justify") {
-        push();
-        translate(
-          this.previousMouseX - textWidth(this.message) / 2,
-          this.previousMouseY + (textAscent() * this.fontScalar) / 2
-        );
-        rotate(this.rotate.degree);
-        line(0, 0, textWidth(this.message), 0);
-        pop();
+        textAlign(CENTER, BOTTOM);
+        line(-textWidth(this.message) / 2, 0, textWidth(this.message) / 2, 0);
       } else if (this.alignment === "left") {
-        push();
-        translate(
-          this.previousMouseX -
-            textWidth(this.message) / 2 -
-            this.controller.gapX / 2,
-          this.previousMouseY + (textAscent() * this.fontScalar) / 2
-        );
-        rotate(this.rotate.degree);
+        textAlign(LEFT, BOTTOM);
         line(0, 0, textWidth(this.message), 0);
-        pop();
       } else {
-        push();
-        translate(
-          this.previousMouseX -
-            textWidth(this.message) / 2 +
-            this.controller.gapX / 2,
-          this.previousMouseY + (textAscent() * this.fontScalar) / 2
-        );
-        rotate(this.rotate.degree);
-        line(0, 0, textWidth(this.message), 0);
-        pop();
+        textAlign(RIGHT, BOTTOM);
+        line(-textWidth(this.message), 0, 0, 0);
       }
+      pop();
     }
 
     //Text decoration Through
     if (this.decorationSThrough === "line-through") {
-      this.ascVal = textAscent() * this.fontScalar;
+      push();
+      translate(this.previousMouseX, this.previousMouseY);
+      rotate(this.rotate.degree);
       if (this.alignment === "center" || this.alignment === "justify") {
-        push();
-        translate(
-          this.previousMouseX - textWidth(this.message) / 2,
-          this.previousMouseY + this.fontBaseline
+        textAlign(CENTER);
+        line(
+          -textWidth(this.message) / 2,
+          -((textAscent(this.message) - textDescent(this.message)) / 2),
+          textWidth(this.message) / 2,
+          -((textAscent(this.message) - textDescent(this.message)) / 2)
         );
-        rotate(this.rotate.degree);
-        line(0, 0, textWidth(this.message), 0);
-        pop();
       } else if (this.alignment === "left") {
-        push();
-        translate(
-          this.previousMouseX -
-            textWidth(this.message) / 2 -
-            this.controller.gapX / 2,
-          this.previousMouseY + this.fontBaseline
+        textAlign(LEFT);
+        line(
+          0,
+          -((textAscent(this.message) - textDescent(this.message)) / 2),
+          textWidth(this.message),
+          -((textAscent(this.message) - textDescent(this.message)) / 2)
         );
-        rotate(this.rotate.degree);
-        line(0, 0, textWidth(this.message), 0);
-        pop();
       } else {
-        push();
-        translate(
-          this.previousMouseX -
-            textWidth(this.message) / 2 +
-            this.controller.gapX / 2,
-          this.previousMouseY + this.fontBaseline
+        textAlign(RIGHT);
+        line(
+          -textWidth(this.message),
+          -((textAscent(this.message) - textDescent(this.message)) / 2),
+          0,
+          -((textAscent(this.message) - textDescent(this.message)) / 2)
         );
-        rotate(this.rotate.degree);
-        line(0, 0, textWidth(this.message), 0);
-        pop();
       }
+      pop();
     }
 
     //Output the text on the correct location on the canvas and controller
+    push();
     if (this.alignment === "center" || this.alignment === "justify") {
-      push();
-      translate(
-        this.previousMouseX - textWidth(this.message) / 2,
-        this.previousMouseY + (textAscent() * this.fontScalar) / 2
-      );
-      rotate(this.rotate.degree);
-      text(this.message, 0, 0);
-      pop();
+      textAlign(CENTER);
     } else if (this.alignment === "left") {
-      push();
-      translate(
-        this.previousMouseX -
-          textWidth(this.message) / 2 -
-          this.controller.gapX / 2,
-        this.previousMouseY + (textAscent() * this.fontScalar) / 2
-      );
-      rotate(this.rotate.degree);
-      text(this.message, 0, 0);
-      pop();
+      textAlign(LEFT);
     } else {
-      push();
-      translate(
-        this.previousMouseX -
-          textWidth(this.message) / 2 +
-          this.controller.gapX / 2,
-        this.previousMouseY + (textAscent() * this.fontScalar) / 2
-      );
-      rotate(this.rotate.degree);
-      text(this.message, 0, 0);
-      pop();
+      textAlign(RIGHT);
     }
+    translate(this.previousMouseX, this.previousMouseY);
+    rotate(this.rotate.degree);
+    text(this.message, 0, 0);
+    pop();
   }
 
   displayController() {
