@@ -107,6 +107,7 @@ class RegularPolygon extends Tools {
     push();
     this.isFilled.status ? fill(this.color.fill) : noFill();
     stroke(this.color.outline);
+    angleMode(RADIANS);
     translate(this.previousMouseX, this.previousMouseY);
     rotate((this.rotate.degree * PI) / 180); //Convert degrees to radians
     this.drawPolygon(0, 0, this.radius, this.points);
@@ -117,6 +118,7 @@ class RegularPolygon extends Tools {
     let angle = TWO_PI / npoints;
     beginShape();
     for (let a = 0; a < TWO_PI; a += angle) {
+      console.log(x);
       let sx = x + cos(a) * radius;
       let sy = y + sin(a) * radius;
       vertex(sx, sy);
