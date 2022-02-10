@@ -9,7 +9,7 @@ class Rectangle extends Tools {
     this.previousMouseX = -1;
     this.previousMouseY = -1;
     this.width = 200;
-    this.height = 100;  
+    this.height = 100;
   }
 
   draw() {
@@ -32,8 +32,8 @@ class Rectangle extends Tools {
       this.drag.pressed(
         this.previousMouseX - this.controller.w / 2,
         this.previousMouseY - this.controller.h / 2,
-        this.controller.w +  this.controller.w / 2,
-        this.controller.h +  this.controller.h / 2
+        this.controller.w + this.controller.w / 2,
+        this.controller.h + this.controller.h / 2
       );
     } else {
       //Chceck if I finish/discard changes
@@ -82,8 +82,8 @@ class Rectangle extends Tools {
       this.drag.over(
         this.previousMouseX - this.controller.w / 2,
         this.previousMouseY - this.controller.h / 2,
-        this.controller.w +  this.controller.w / 2,
-        this.controller.h +  this.controller.h / 2
+        this.controller.w + this.controller.w / 2,
+        this.controller.h + this.controller.h / 2
       );
 
       //Change cursor based on the current mouse location
@@ -102,15 +102,12 @@ class Rectangle extends Tools {
   }
 
   displayRectangle() {
-    // Change the mode to DEGREES
-    angleMode(DEGREES);
     push();
+    angleMode(DEGREES);
     this.isFilled.status ? fill(this.color.fill) : noFill();
     stroke(this.color.outline);
-    translate(
-      this.previousMouseX - this.width / 2,
-      this.previousMouseY - this.height / 2
-    );
+    rectMode(CENTER);
+    translate(this.previousMouseX, this.previousMouseY);
     rotate(this.rotate.degree);
     rect(0, 0, this.width, this.height);
     pop();
