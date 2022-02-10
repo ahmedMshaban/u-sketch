@@ -37,10 +37,10 @@ class Triangle extends Tools {
       }
 
       this.drag.pressed(
-        this.x1 - this.side - this.controller.gapX,
-        this.y1 - this.side - this.controller.gapY / 2,
-        this.controller.w + this.controller.gapX,
-        this.side * 2 + this.controller.gapY
+        this.x1 - this.controller.w / 2,
+        this.y1 - this.controller.h / 2,
+        this.controller.w +  this.controller.w / 2,
+        this.controller.h +  this.controller.h / 2
       );
     } else {
       //Chceck if I finish/discard changes
@@ -95,10 +95,10 @@ class Triangle extends Tools {
 
       //Is mouse over the Controller area
       this.drag.over(
-        this.x1 - this.side - this.controller.gapX,
-        this.y1 - this.side - this.controller.gapY / 2,
-        this.controller.w + this.controller.gapX,
-        this.side * 2 + this.controller.gapY
+        this.x1 - this.controller.w / 2,
+        this.y1 - this.controller.h / 2,
+        this.controller.w +  this.controller.w / 2,
+        this.controller.h +  this.controller.h / 2
       );
 
       //Change cursor based on the current mouse location
@@ -110,8 +110,8 @@ class Triangle extends Tools {
     //Triangle Controller
     this.controller.x = this.x1;
     this.controller.y = this.y1;
-    this.controller.w = this.side * 2 + this.controller.gapX / 2;
-    this.controller.h = this.side * 2 + this.controller.gapY * 2;
+    this.controller.w = 30;
+    this.controller.h = 30;
 
     Controller.active ? this.controller.draw() : null;
   }
