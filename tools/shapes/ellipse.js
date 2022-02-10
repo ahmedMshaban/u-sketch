@@ -30,12 +30,10 @@ class Ellipse extends Tools {
       }
 
       this.drag.pressed(
-        (this.controller.x =
-          this.previousMouseX - this.width / 2 - this.controller.gapX / 2),
-        (this.controller.y =
-          this.previousMouseY - this.height / 2 - this.controller.gapY / 2),
-        (this.controller.w = this.width + this.controller.gapX),
-        (this.controller.h = this.height + this.controller.gapY)
+        this.previousMouseX - this.controller.w / 2,
+        this.previousMouseY - this.controller.h / 2,
+        this.controller.w +  this.controller.w / 2,
+        this.controller.h +  this.controller.h / 2
       );
     } else {
       //Chceck if I finish/discard changes
@@ -82,12 +80,10 @@ class Ellipse extends Tools {
 
       //Is mouse over the Controller area
       this.drag.over(
-        (this.controller.x =
-          this.previousMouseX - this.width / 2 - this.controller.gapX / 2),
-        (this.controller.y =
-          this.previousMouseY - this.height / 2 - this.controller.gapY / 2),
-        (this.controller.w = this.width + this.controller.gapX),
-        (this.controller.h = this.height + this.controller.gapY)
+        this.previousMouseX - this.controller.w / 2,
+        this.previousMouseY - this.controller.h / 2,
+        this.controller.w +  this.controller.w / 2,
+        this.controller.h +  this.controller.h / 2
       );
 
       //Change cursor based on the current mouse location
@@ -99,8 +95,8 @@ class Ellipse extends Tools {
     //Ellipse Controller
     this.controller.x = this.previousMouseX;
     this.controller.y = this.previousMouseY;
-    this.controller.w = this.width;
-    this.controller.h = this.height + this.controller.gapY * 2;
+    this.controller.w = 30;
+    this.controller.h = 30;
 
     Controller.active ? this.controller.draw() : null;
   }
