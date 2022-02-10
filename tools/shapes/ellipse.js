@@ -32,8 +32,8 @@ class Ellipse extends Tools {
       this.drag.pressed(
         this.previousMouseX - this.controller.w / 2,
         this.previousMouseY - this.controller.h / 2,
-        this.controller.w +  this.controller.w / 2,
-        this.controller.h +  this.controller.h / 2
+        this.controller.w + this.controller.w / 2,
+        this.controller.h + this.controller.h / 2
       );
     } else {
       //Chceck if I finish/discard changes
@@ -82,8 +82,8 @@ class Ellipse extends Tools {
       this.drag.over(
         this.previousMouseX - this.controller.w / 2,
         this.previousMouseY - this.controller.h / 2,
-        this.controller.w +  this.controller.w / 2,
-        this.controller.h +  this.controller.h / 2
+        this.controller.w + this.controller.w / 2,
+        this.controller.h + this.controller.h / 2
       );
 
       //Change cursor based on the current mouse location
@@ -102,17 +102,14 @@ class Ellipse extends Tools {
   }
 
   displayEllipse() {
+    push();
     // Change the mode to DEGREES
     angleMode(DEGREES);
-    push();
     this.isFilled.status ? fill(this.color.fill) : noFill();
     stroke(this.color.outline);
-    translate(
-      this.previousMouseX - this.width / 2,
-      this.previousMouseY - this.height / 2
-    );
+    translate(this.previousMouseX, this.previousMouseY);
     rotate(this.rotate.degree);
-    ellipse(this.width / 2, this.height / 2, this.width, this.height);
+    ellipse(0, 0, this.width, this.height);
     pop();
   }
 
