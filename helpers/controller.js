@@ -16,9 +16,9 @@ class Controller {
     if (Controller.active) {
       push();
       rectMode(CENTER);
-      noFill();
-      stroke("gray");
-      rect(this.x, this.y, this.w + this.gapX, this.h - this.gapY);
+      fill("green");
+      stroke("green");
+      ellipse(this.x, this.y, this.w, this.h);
       this.showControllerButtons();
       pop();
     }
