@@ -4,9 +4,6 @@ class Text extends Tools {
     this.color = new Color();
     this.controller = new Controller();
     this.size = 14;
-    this.fontScalar = 0.8;
-    this.fontBaseline = 0;
-    this.ascVal = null;
     //where was the mouse on the last time draw was called.
     //set it to -1 to begin with
     this.previousMouseX = -1;

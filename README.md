@@ -1,6 +1,6 @@
 # u-sketch
 
 Postpone
-- Rotate Degree with text through.
 - Undo
-
+- Rotate for triangle 
+- Remove extra code from text class (font base, etc..)
