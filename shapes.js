@@ -57,9 +57,12 @@ class Shapes extends Tools {
     const optionsContainer = select(
       "#" + this.shapesList[0].name + "sideBarItem .optionsContainer",
       "#sidebar"
-    ).elt; 
-    for(const  [currentIndex, option] of optionsContainer.childNodes.entries()) {
-      if(currentIndex !== targetIndex) {
+    ).elt;
+    for (const [
+      currentIndex,
+      option,
+    ] of optionsContainer.childNodes.entries()) {
+      if (currentIndex !== targetIndex) {
         option.className = "shapeOptions";
       } else {
         option.className = "shapeOptions active";
@@ -76,6 +79,14 @@ class Shapes extends Tools {
     }
     sel.selected(this.selectedShape.name);
     sel.changed(() => {
+      if (Controller.active === true && this.selectedShape !== sel.value()) {
+        alert(
+          "Please save/discard changes first before you select a new shape!"
+        );
+        //Update the current selected shape
+        sel.selected(this.selectedShape.name);
+        return;
+      }
       for (const [index, shape] of this.shapesList.entries()) {
         if (sel.value() === shape.name) {
           this.updateToolbar(shape);
