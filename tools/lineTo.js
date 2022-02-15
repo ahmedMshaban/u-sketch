@@ -6,7 +6,10 @@ class LineTo extends Tools {
     super(icon, name);
     this.startMouseX = -1;
     this.startMouseY = -1;
-    this.drawing = false;
+    this.endMouseX = -1;
+    this.endMouseX = -1;
+    this.controllerFP = new Controller(); //First point Controller
+    this.controllerSP = new Controller(); //Second point Controller
     this.size = new Size();
     this.color = new Color();
   }
@@ -17,33 +20,63 @@ class LineTo extends Tools {
     if (mouseIsPressed) {
       //if it's the start of drawing a new line
       if (this.startMouseX == -1) {
-        this.startMouseX = mouseX;
-        this.startMouseY = mouseY;
-        this.drawing = true;
         //save the current pixel Array
         loadPixels();
+        //I'm drawing now...
+        this.isDrawing = true;
+        this.startMouseX = mouseX;
+        this.startMouseY = mouseY;
       } else {
         //update the screen with the saved pixels to hide any previous
         //line between mouse pressed and released
         updatePixels();
         //draw the line
-        strokeWeight(this.size.value);
-        stroke(this.color.outline);
-        line(this.startMouseX, this.startMouseY, mouseX, mouseY);
+        this.drawLine();
+        //Open the controller and show it.
+        Controller.active = true;
+        //Get the current mouse location
+        this.endMouseX = mouseX;
+        this.endMouseY = mouseY;
+        this.displayFPController();
+        this.displaySPController();
       }
-    } else if (this.drawing) {
+    } else if (this.isDrawing) {
       //save the pixels with the most recent line and reset the
       //drawing bool and start locations
       loadPixels();
-      this.drawing = false;
+      this.isDrawing = false;
       this.startMouseX = -1;
       this.startMouseY = -1;
     }
   }
 
-  topBottomPointsHandler() {
-
+  drawLine() {
+    push();
+    strokeWeight(this.size.value);
+    stroke(this.color.outline);
+    line(this.startMouseX, this.startMouseY, mouseX, mouseY);
+    pop();
   }
+
+  displayFPController() {
+    this.controllerFP.x = this.startMouseX;
+    this.controllerFP.y = this.startMouseY;
+    this.controllerFP.w = max(10, this.size.value);
+    this.controllerFP.h = max(10, this.size.value);
+
+    Controller.active ? this.controllerFP.draw() : null;
+  }
+
+  displaySPController() {
+    this.controllerSP.x = this.endMouseX;
+    this.controllerSP.y = this.endMouseY;
+    this.controllerSP.w = max(10, this.size.value);
+    this.controllerSP.h = max(10, this.size.value);
+
+    Controller.active ? this.controllerSP.draw() : null;
+  }
+
+  topBottomPointsHandler() {}
 
   displayConfigOptions() {
     return [
