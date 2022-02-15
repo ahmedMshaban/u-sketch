@@ -7,46 +7,120 @@ class LineTo extends Tools {
     this.startMouseX = -1;
     this.startMouseY = -1;
     this.endMouseX = -1;
-    this.endMouseX = -1;
+    this.endMouseY = -1;
     this.controllerFP = new Controller(); //First point Controller
     this.controllerSP = new Controller(); //Second point Controller
+    this.dragFP = new Draggable(); //First point drag
     this.size = new Size();
     this.color = new Color();
+    this.finishedLine = false;
   }
 
   //draws the line to the screen
   draw() {
-    //only draw when mouse is clicked
+    //only draw when   mouse is clicked
     if (mouseIsPressed) {
-      //if it's the start of drawing a new line
-      if (this.startMouseX == -1) {
-        //save the current pixel Array
-        loadPixels();
-        //I'm drawing now...
-        this.isDrawing = true;
-        this.startMouseX = mouseX;
-        this.startMouseY = mouseY;
-      } else {
-        //update the screen with the saved pixels to hide any previous
-        //line between mouse pressed and released
+      if (!this.finishedLine) {
+        //if it's the start of drawing a new line
+        if (this.startMouseX == -1) {
+          //save the current pixel Array
+          loadPixels();
+          //I'm drawing now...
+          this.isDrawing = true;
+
+          //Save the starting mouse location
+          this.startMouseX = mouseX;
+          this.startMouseY = mouseY;
+
+          //Open the controller and show it.
+          Controller.active = true;
+        } else {
+          //update the screen with the saved pixels to hide any previous
+          //line between mouse pressed and released
+          updatePixels();
+          //draw the line
+          this.drawLine();
+          //Get the current mouse location
+          this.endMouseX = mouseX;
+          this.endMouseY = mouseY;
+          this.displayFPController();
+          this.displaySPController();
+        }
+      }
+      this.dragFP.pressed(
+        this.startMouseX - this.controllerFP.w / 2,
+        this.startMouseY - this.controllerFP.h / 2,
+        this.controllerFP.w,
+        this.controllerFP.h
+      );
+    } else {
+      //Chceck if I finish/discard changes
+      if (Controller.active === false && this.isDrawing) {
+        //Then stop drawing
+        this.isDrawing = false;
+
+        //Did I save cahnges?
+        if (Controller.finishChanges === true) {
+          //clear the background and load the last saved pixels
+          //then re draw the text but without the controller
+          background(255);
+          updatePixels();
+
+          this.drawLine();
+          //reset the finishChanges status
+          Controller.finishChanges = false;
+          //save the pixels with the most recent draw
+          loadPixels();
+          //save the pixels with the most recent line
+        }
+
+        //reset the and start locations
+        this.startMouseX = -1;
+        this.startMouseY = -1;
+        this.endMouseX = -1;
+        this.endtMouseY = -1;
+        this.finishedLine = false;
+      }
+
+      //Am I still drawing?
+      else if (this.isDrawing) {
+        //This means I released the mouse
+        this.finishedLine = true;
+        background(255);
         updatePixels();
-        //draw the line
         this.drawLine();
-        //Open the controller and show it.
-        Controller.active = true;
-        //Get the current mouse location
-        this.endMouseX = mouseX;
-        this.endMouseY = mouseY;
         this.displayFPController();
         this.displaySPController();
       }
-    } else if (this.isDrawing) {
-      //save the pixels with the most recent line and reset the
-      //drawing bool and start locations
-      loadPixels();
-      this.isDrawing = false;
-      this.startMouseX = -1;
-      this.startMouseY = -1;
+
+      // Quit dragging
+      this.dragFP.released();
+    }
+
+    if (this.isDrawing && this.finishedLine) {
+      //If I'm dragging the first point
+      if (this.dragFP.dragging) {
+        background(255);
+        //Save the current mouse location
+        this.startMouseX = mouseX;
+        this.startMouseY = mouseY;
+        updatePixels();
+        // console.log(this.startMouseX, this.startMouseY);
+        this.drawLine();
+        this.displayFPController();
+        this.displaySPController();
+      }
+
+      //Is mouse over the Controller area of the first point
+      this.dragFP.over(
+        this.startMouseX - this.controllerFP.w / 2,
+        this.startMouseY - this.controllerFP.h / 2,
+        this.controllerFP.w,
+        this.controllerFP.h
+      );
+
+      //Change cursor based on the current mouse location
+      this.dragFP.show();
     }
   }
 
@@ -54,7 +128,7 @@ class LineTo extends Tools {
     push();
     strokeWeight(this.size.value);
     stroke(this.color.outline);
-    line(this.startMouseX, this.startMouseY, mouseX, mouseY);
+    line(this.startMouseX, this.startMouseY, this.endMouseX, this.endMouseY);
     pop();
   }
 
