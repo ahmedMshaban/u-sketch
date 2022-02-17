@@ -43,7 +43,7 @@ class Rectangle extends Tools {
         //Did I save cahnges?
         if (Controller.finishChanges === true) {
           //clear the background and load the last saved pixels
-          //then re draw the text but without the controller
+          //then re draw the rectangle but without the controller
           background(255);
           updatePixels();
           this.displayRectangle();
