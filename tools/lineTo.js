@@ -11,6 +11,7 @@ class LineTo extends Tools {
     this.controllerFP = new Controller(); //First point Controller
     this.controllerSP = new Controller(); //Second point Controller
     this.dragFP = new Draggable(); //First point drag
+    this.dragSP = new Draggable(); //Second point drag
     this.size = new Size();
     this.color = new Color();
     this.finishedLine = false;
@@ -43,15 +44,31 @@ class LineTo extends Tools {
           //Get the current mouse location
           this.endMouseX = mouseX;
           this.endMouseY = mouseY;
+          //To make sure the two points are not overlapping
+          if (
+            this.startMouseX === this.endMouseX &&
+            this.startMouseY === this.endMouseY
+          ) {
+            this.endMouseX = mouseX + this.size.value + 15;
+          }
           this.displayFPController();
           this.displaySPController();
         }
       }
+      //First point
       this.dragFP.pressed(
         this.startMouseX - this.controllerFP.w / 2,
         this.startMouseY - this.controllerFP.h / 2,
         this.controllerFP.w,
         this.controllerFP.h
+      );
+
+      //Second point
+      this.dragSP.pressed(
+        this.endMouseX - this.controllerSP.w / 2,
+        this.endMouseY - this.controllerSP.h / 2,
+        this.controllerSP.w,
+        this.controllerSP.h
       );
     } else {
       //Chceck if I finish/discard changes
@@ -88,6 +105,13 @@ class LineTo extends Tools {
         this.finishedLine = true;
         background(255);
         updatePixels();
+        //To make sure the two points are not overlapping
+        if (
+          this.startMouseX === this.endMouseX &&
+          this.startMouseY === this.endMouseY
+        ) {
+          this.endMouseX = mouseX + this.size.value + 15;
+        }
         this.drawLine();
         this.displayFPController();
         this.displaySPController();
@@ -95,6 +119,7 @@ class LineTo extends Tools {
 
       // Quit dragging
       this.dragFP.released();
+      this.dragSP.released();
     }
 
     if (this.isDrawing && this.finishedLine) {
@@ -105,7 +130,6 @@ class LineTo extends Tools {
         this.startMouseX = mouseX;
         this.startMouseY = mouseY;
         updatePixels();
-        // console.log(this.startMouseX, this.startMouseY);
         this.drawLine();
         this.displayFPController();
         this.displaySPController();
@@ -121,6 +145,29 @@ class LineTo extends Tools {
 
       //Change cursor based on the current mouse location
       this.dragFP.show();
+
+      //If I'm dragging the second point
+      if (this.dragSP.dragging) {
+        background(255);
+        //Save the current mouse location
+        this.endMouseX = mouseX;
+        this.endMouseY = mouseY;
+        updatePixels();
+        this.drawLine();
+        this.displayFPController();
+        this.displaySPController();
+      }
+
+      //Is mouse over the Controller area of the first point
+      this.dragSP.over(
+        this.endMouseX - this.controllerSP.w / 2,
+        this.endMouseY - this.controllerSP.h / 2,
+        this.controllerSP.w,
+        this.controllerSP.h
+      );
+
+      //Change cursor based on the current mouse location
+      this.dragSP.show();
     }
   }
 
@@ -149,8 +196,6 @@ class LineTo extends Tools {
 
     Controller.active ? this.controllerSP.draw() : null;
   }
-
-  topBottomPointsHandler() {}
 
   displayConfigOptions() {
     return [
