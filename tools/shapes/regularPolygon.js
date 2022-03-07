@@ -118,7 +118,6 @@ class RegularPolygon extends Tools {
     let angle = TWO_PI / npoints;
     beginShape();
     for (let a = 0; a < TWO_PI; a += angle) {
-      console.log(x);
       let sx = x + cos(a) * radius;
       let sy = y + sin(a) * radius;
       vertex(sx, sy);

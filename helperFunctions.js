@@ -24,7 +24,6 @@ function HelperFunctions() {
   });
 
   select("#discardButton").mouseClicked(function () {
-    //To Do something
     updatePixels();
     Controller.active = false;
     select(".controller-buttons").removeClass("active");

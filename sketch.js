@@ -34,7 +34,6 @@ function setup() {
   toolset.addTool(new Text("assets/text.svg", "Text"));
   toolset.addTool(new Eraser("assets/eraser.svg", "Eraser"));
   toolset.addTool(new MirrorDraw("assets/mirror.svg", "MirrorDraw"));
-  toolset.addTool(new BucketFill("assets/bucketFill.svg", "BucketFill"));
   toolset.addTool(
     new Shapes(shapes.selectedShape.icon, shapes.selectedShape.name)
   );
